@@ -20,7 +20,8 @@ export default {
 </script>
 
 <style>
-
+nav {
+  text-align: left;
+  padding: 0 5%;
+}
 </style>
-
-

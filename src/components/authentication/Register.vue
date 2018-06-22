@@ -1,8 +1,8 @@
 <template>
-<main>
+<div>
   <h1>This is Register.</h1>  
   <router-link :to="{name: 'Login'}" tag="a">Login</router-link>
-</main>
+</div>
 </template>
 
 <script>
