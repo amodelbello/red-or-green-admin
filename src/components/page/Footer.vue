@@ -2,8 +2,7 @@
 <footer class="page-footer">
   <div class="footer-copyright">
     <div class="container">
-    © 2014 Copyright Text
-    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+    &copy; {{ copyrightYear }} Red or Green
     </div>
   </div>
 </footer>
@@ -13,6 +12,12 @@
 export default {
   name: 'Footer',
   props: {
+  },
+  computed: {
+    copyrightYear() {
+      const today = new Date();
+      return today.getFullYear();
+    }
   }
 }
 </script>

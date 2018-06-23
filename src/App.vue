@@ -1,12 +1,11 @@
 <template>
   <div id="app">
-    <header>
-    <Nav msg="Hello"></Nav>
-    </header>
-    <main id="main">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <Nav></Nav>
+
+    <main class="container">
+      <router-view/>
     </main>
+
     <Footer></Footer>
   </div>
 </template>
@@ -44,6 +43,8 @@ export default {
 }
 
 main {
+  padding-top: 40px;
+
   /* sticky footer */
   flex: 1 0 auto;
 }
