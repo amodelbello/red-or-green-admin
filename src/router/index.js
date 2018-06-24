@@ -6,7 +6,26 @@ import Businesses from '@/components/businesses/Businesses';
 
 Vue.use(Router);
 
-export default new Router({
+const isLoggedIn = () => {
+  return (
+    localStorage.getItem('token') !== undefined && 
+    localStorage.getItem('token') !== null
+  );
+}
+
+const shouldBeGuarded = (to) => {
+  if (
+    to.path === '/' ||
+    to.path === '/logout' ||
+    to.path === '/register'
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -33,3 +52,30 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  const authorized = isLoggedIn();
+
+  if (authorized && shouldBeGuarded(to)) {
+    next();
+  }
+
+  if (!authorized && shouldBeGuarded(to)) {
+    next('/');
+  }
+
+  if (authorized && !shouldBeGuarded(to)) {
+    next('/businesses');
+  }
+
+  if (!authorized && !shouldBeGuarded(to)) {
+    next();
+  }
+
+  console.log(authorized);
+  console.log(to);
+  console.log(from);
+  next();
+});
+
+export default router;

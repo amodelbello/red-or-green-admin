@@ -19,7 +19,7 @@ const actions = {
     axios.get('http://localhost:3000/api/businesses')
     .then((response) => {
       console.log(response.data.data);
-      commit('SET_BUSINESSES', response.data.data)
+      commit('SET_BUSINESSES', response.data.data);
     })
     .catch(e => {
       console.log(e);

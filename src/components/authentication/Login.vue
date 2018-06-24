@@ -1,7 +1,7 @@
 <template>
 <div class="row">
   <img src="../../../src/assets/red_greenChile.png">
-  <form class="col s6 offset-s3">
+  <form class="col s6 offset-s3" @submit.prevent="submit">
     <div class="row">
       <div class="input-field col s12">
         <input id="email" type="email" class="validate">
@@ -24,11 +24,28 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Login',
   props: {
-    msg: String
-  }
+  },
+  computed: {
+    ...mapGetters([
+      'authToken'
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'login'
+    ]),
+
+    submit() {
+      this.login();
+      this.$router.push('/businesses');
+    }
+  },
 }
 </script>
 
