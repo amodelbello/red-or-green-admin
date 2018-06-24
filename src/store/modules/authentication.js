@@ -26,11 +26,6 @@ const mutations = {
 const actions = {
   login: ({commit, dispatch}, credentials) => {
 
-    credentials = {
-      'email': 'adminuser@lalala.com',
-      'password': 'password1',
-    }
-
     axios.post('http://localhost:3000/api/login', credentials)
     .then((response) => {
       const token = response.data.data.token;

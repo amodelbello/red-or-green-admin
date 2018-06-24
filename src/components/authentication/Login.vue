@@ -4,14 +4,14 @@
   <form class="col s6 offset-s3" @submit.prevent="submit">
     <div class="row">
       <div class="input-field col s12">
-        <input id="email" type="email" class="validate">
+        <input id="email" type="email" v-model="email" class="validate">
         <label for="email">Email</label>
       </div>
     </div>
     
     <div class="row">
       <div class="input-field col s12">
-        <input id="password" type="password" class="validate">
+        <input id="password" type="password" v-model="password" class="validate">
         <label for="password">Password</label>
       </div>
     </div>
@@ -31,6 +31,12 @@ export default {
   name: 'Login',
   props: {
   },
+  data() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
   computed: {
     ...mapGetters([
       'authToken'
@@ -42,7 +48,10 @@ export default {
     ]),
 
     submit() {
-      this.login();
+      this.login({
+        email: this.email,
+        password: this.password,
+      });
     }
   },
 }
