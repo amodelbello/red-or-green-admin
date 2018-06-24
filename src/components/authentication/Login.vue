@@ -43,7 +43,6 @@ export default {
 
     submit() {
       this.login();
-      this.$router.push('/businesses');
     }
   },
 }

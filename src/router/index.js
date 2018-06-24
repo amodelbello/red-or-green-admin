@@ -3,15 +3,9 @@ import Router from 'vue-router';
 import Login from '@/components/authentication/Login';
 import Register from '@/components/authentication/Register';
 import Businesses from '@/components/businesses/Businesses';
+import authMixin from '@/mixins/authentication.js'
 
 Vue.use(Router);
-
-const isLoggedIn = () => {
-  return (
-    localStorage.getItem('token') !== undefined && 
-    localStorage.getItem('token') !== null
-  );
-}
 
 const shouldBeGuarded = (to) => {
   if (
@@ -54,7 +48,8 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  const authorized = isLoggedIn();
+
+  const authorized = authMixin.isLoggedIn();
 
   if (authorized && shouldBeGuarded(to)) {
     next();

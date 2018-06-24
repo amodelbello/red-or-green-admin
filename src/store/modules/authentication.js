@@ -1,3 +1,4 @@
+import router from '../../router'
 import axios from 'axios';
 
 const state = {
@@ -35,6 +36,7 @@ const actions = {
       const token = response.data.data.token;
       localStorage.setItem('token', token);
       commit('LOGIN', token);
+      router.push('/businesses');
     })
     .catch(e => {
       dispatch('logout');

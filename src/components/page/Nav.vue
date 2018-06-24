@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import authMixin from '@/mixins/authentication.js'
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -35,15 +36,7 @@ export default {
     ]),
 
     isLoggedIn() {
-      const token = this.authToken;
-      if (
-        token !== null &&
-        token !== undefined
-      ) {
-        return true;
-      }
-
-      return false;
+      return authMixin.isLoggedIn();
     },
 
     logoutClick() {
@@ -51,6 +44,9 @@ export default {
       this.$router.push('/');
     }
   },
+  mixins: {
+    authMixin
+  }
 }
 </script>
 
