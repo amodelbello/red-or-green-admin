@@ -26,16 +26,14 @@ const mutations = {
 const actions = {
   login: ({commit, dispatch}, credentials) => {
 
-    axios.post('http://localhost:3000/api/login', credentials)
+    return axios.post('http://localhost:3000/api/login', credentials)
     .then((response) => {
       const token = response.data.data.token;
       localStorage.setItem('token', token);
       commit('LOGIN', token);
       router.push('/businesses');
-    })
-    .catch(e => {
-      dispatch('logout');
     });
+
   },
 
   logout: ({commit}) => {
