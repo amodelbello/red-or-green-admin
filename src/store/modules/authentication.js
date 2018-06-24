@@ -42,7 +42,6 @@ const actions = {
   },
 
   logout: ({commit}) => {
-    console.log("LOGOUT CLICKED!!!");
     localStorage.removeItem('token');
     commit('LOGOUT');
   },
@@ -50,11 +49,10 @@ const actions = {
   register: ({commit}, credentials) => {
     axios.get('http://localhost:3000/api/businesses')
     .then((response) => {
-      console.log(response.data.data);
       commit('REGISTER', response.data.data);
     })
     .catch(e => {
-      console.log(`Problem registering new user: ${e}`);
+      dispatch('logout');
     });
   },
 };

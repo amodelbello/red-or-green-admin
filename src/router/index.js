@@ -71,11 +71,6 @@ router.beforeEach((to, from, next) => {
   if (!authorized && !shouldBeGuarded(to)) {
     next();
   }
-
-  console.log(authorized);
-  console.log(to);
-  console.log(from);
-  next();
 });
 
 export default router;
