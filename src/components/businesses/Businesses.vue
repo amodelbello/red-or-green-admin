@@ -11,17 +11,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Businesses',
   props: {
   },
   computed: {
-    businesses() {
-      return this.$store.getters.businesses;
-    }
+    ...mapGetters([
+      'businesses'
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'initBusinesses'
+    ]),
   },
   created() {
-    this.$store.dispatch('initStore');
+    this.initBusinesses();
   }
 }
 </script>

@@ -13,16 +13,12 @@
 <script>
 import Nav from '@/components/page/Nav.vue'
 import Footer from '@/components/page/Footer.vue'
-import Login from '@/components/authentication/Login.vue'
-import Register from '@/components/authentication/Register.vue'
 
 export default {
   name: 'app',
   components: {
     Nav,
     Footer,
-    Login,
-    Register,
   }
 }
 </script>
