@@ -18,7 +18,7 @@ const mutations = {
 const actions = {
   initCategories: ({commit}) => {
     axios.get(
-      'http://localhost:3000/api/categories', 
+      process.env.VUE_APP_API_HOST + '/api/categories', 
       authMixin.getHttpAuthHeader()
     )
     .then((response) => {

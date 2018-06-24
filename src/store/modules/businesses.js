@@ -16,7 +16,7 @@ const mutations = {
 
 const actions = {
   initBusinesses: ({commit}) => {
-    axios.get('http://localhost:3000/api/businesses')
+    axios.get(process.env.VUE_APP_API_HOST + '/api/businesses')
     .then((response) => {
       commit('SET_BUSINESSES', response.data.data);
     })

@@ -26,7 +26,7 @@ const mutations = {
 const actions = {
   login: ({commit, dispatch}, credentials) => {
 
-    return axios.post('http://localhost:3000/api/login', credentials)
+    return axios.post(process.env.VUE_APP_API_HOST + '/api/login', credentials)
     .then((response) => {
       const token = response.data.data.token;
       localStorage.setItem('token', token);
@@ -42,7 +42,7 @@ const actions = {
   },
 
   register: ({commit}, credentials) => {
-    axios.get('http://localhost:3000/api/businesses')
+    axios.get(process.env.VUE_APP_API_HOST + '/api/businesses')
     .then((response) => {
       commit('REGISTER', response.data.data);
     })
