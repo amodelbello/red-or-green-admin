@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
+import authMixin from '@/mixins/authentication.js'
+
 import Login from '@/components/authentication/Login';
 import Register from '@/components/authentication/Register';
 import Businesses from '@/components/businesses/Businesses';
-import authMixin from '@/mixins/authentication.js'
+import Categories from '@/components/categories/Categories';
 
 Vue.use(Router);
 
@@ -38,6 +41,12 @@ const router = new Router({
       path: '/businesses',
       name: 'Businesses',
       component: Businesses,
+      props: true
+    },
+    {
+      path: '/categories',
+      name: 'Categories',
+      component: Categories,
       props: true
     },
     {

@@ -5,6 +5,7 @@
       <a href="#" class="brand-logo">Red or Green Admin</a>
       <ul v-if="isLoggedIn()" id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/businesses">Businesses</a></li>
+        <li><a href="/categories">Categories</a></li>
         <li><a @click="logoutClick">Logout</a></li>
       </ul>
       <ul v-else id="nav-mobile" class="right hide-on-med-and-down">
