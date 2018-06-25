@@ -34,13 +34,19 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
-main {
+h1 {
+  text-align: center;
+}
 
+main {
   /* sticky footer */
   flex: 1 0 auto;
+}
+
+button, a.btn {
+  margin-top: 40px;
 }
 </style>
