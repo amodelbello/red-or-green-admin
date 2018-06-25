@@ -39,7 +39,6 @@ export default {
 }
 
 main {
-  padding-top: 40px;
 
   /* sticky footer */
   flex: 1 0 auto;

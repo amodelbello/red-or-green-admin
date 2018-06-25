@@ -1,5 +1,5 @@
 <template>
-<div class="row">
+<div id="login-page" class="row">
   <div class="row" v-if="error">
     <div class="col s6 offset-s3">
       <div class="card red lighten-5">
@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style scoped>
-a {
-  cursor: pointer;
+#login-page {
+  padding-top: 40px;
 }
 </style>
