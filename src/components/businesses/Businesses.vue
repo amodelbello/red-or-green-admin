@@ -4,7 +4,11 @@
 <table>
   <tr v-for="(business, k) in businesses" :key="k">
     <td>{{ business.name }}</td>
-    <td>Rating: {{ business.rating }}</td>
+    <td>
+      <span v-for="(rating, k) in business.ratings" :key="k">
+        {{ rating.category.name }}: {{ rating.averageRating }}
+      </span>
+    </td>
   </tr>
 </table>
 </div>
