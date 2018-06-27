@@ -49,4 +49,9 @@ main {
 button, a.btn {
   margin-top: 40px;
 }
+
+div.loading {
+  margin-top: 40px;
+  text-align: center;
+}
 </style>

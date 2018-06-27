@@ -1,58 +1,66 @@
 <template>
 <div class="row">
   <h1>Categories</h1>
-  <table>
-    <tr v-for="(category, k) in categories" :key="k">
+  <div v-if="loading" class="loading">
+    <h6>Loading...</h6>
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+  </div>
+  <div v-else>
+    <table>
+      <tr v-for="(category, k) in categories" :key="k">
 
-      <td>{{ category.name }}</td>
+        <td>{{ category.name }}</td>
 
-      <td class="edit-button-cell">
-        <router-link 
-          :to="{ 
-            name: 'EditCategory', 
-            params: { categoryId: category._id }
-          }"
-        >
+        <td class="edit-button-cell">
+          <router-link 
+            :to="{ 
+              name: 'EditCategory', 
+              params: { categoryId: category._id }
+            }"
+          >
+            <a 
+              class="
+                btn-floating 
+                btn-small 
+                waves-effect 
+                waves-light 
+                right
+              ">
+                <i class="material-icons">edit</i>
+            </a>
+          </router-link>
+        </td>
+
+        <td class="delete-button-cell">
           <a 
+            @click="deleteConfirm(category._id)" 
             class="
-              btn-floating 
-              btn-small 
-              waves-effect 
-              waves-light 
-              right
-            ">
-              <i class="material-icons">edit</i>
+            btn-floating 
+            btn-small 
+            waves-effect 
+            waves-light 
+            right 
+            red 
+            modal-trigger
+            "
+            href="#delete-modal"
+          >
+            <i class="material-icons">delete</i>
           </a>
-        </router-link>
-      </td>
+        </td>
 
-      <td class="delete-button-cell">
-        <a 
-          @click="deleteConfirm(category._id)" 
-          class="
-          btn-floating 
-          btn-small 
-          waves-effect 
-          waves-light 
-          right 
-          red 
-          modal-trigger
-          "
-          href="#delete-modal"
-        >
-          <i class="material-icons">delete</i>
-        </a>
-      </td>
+      </tr>
+    </table>
 
-    </tr>
-  </table>
-
-  <router-link to="/categories/add">
-    <a class="btn waves-effect waves-light right">
-      Create
-      <i class="material-icons right">add_circle</i>
-    </a>
-  </router-link>
+    <router-link to="/categories/add">
+      <a class="btn waves-effect waves-light right">
+        Create
+        <i class="material-icons right">add_circle</i>
+      </a>
+    </router-link>
+  </div>
 
   <!-- Delete Modal -->
   <div id="delete-modal" class="modal">
@@ -76,7 +84,8 @@ export default {
   name: 'Categories',
   data() {
     return {
-      modalInstance: null
+      modalInstance: null,
+      loading: true
     }
   },
   computed: {
@@ -112,6 +121,11 @@ export default {
 
     openModal() {
       this.modalInstance.open();
+    }
+  },
+  watch: {
+    categories: function(newVal, oldVal) {
+      this.loading = false;
     }
   },
   created() {
