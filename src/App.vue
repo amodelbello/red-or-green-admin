@@ -54,4 +54,8 @@ div.loading {
   margin-top: 40px;
   text-align: center;
 }
+
+strong {
+  font-weight: bold;
+}
 </style>

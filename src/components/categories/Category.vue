@@ -1,7 +1,13 @@
 <template>
 <div class="row">
   <h1>{{ pageHeaderContent }}</h1>
-  <form action="">
+  <form @submit.prevent="formSubmit(category)" class="col s12">
+    <p v-if="errors.length">
+      <strong>Please correct the following error(s):</strong>
+      <ul>
+        <li class="red-text" v-for="(error, k) in errors" :key="k">{{ error }}</li>
+      </ul>
+    </p>
     <div class="row">
       <div class="input-field col s12">
         <input type="text" id="category.name" v-model="category.name" class="validate">
@@ -9,34 +15,30 @@
       </div>
     </div>
     <div class="row">
-    <form @submit.prevent="formSubmit(category)" class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-          <textarea v-model="category.description" id="category.description" class="materialize-textarea"></textarea>
-          <label for="category.description" :class="{ active: category.name }">Description</label>
-        </div>
+      <div class="input-field col s12">
+        <textarea v-model="category.description" id="category.description" class="materialize-textarea"></textarea>
+        <label for="category.description" :class="{ active: category.name }">Description</label>
       </div>
+    </div>
 
-      <dl v-if="isEdit" class="left">
-        <dt>Created:</dt>
-        <dd>{{ category.created | formatDate }}</dd>
-        <dt>Last Modified:</dt>
-        <dd>{{ category.updated | formatDate }}</dd>
-      </dl>
+    <dl v-if="isEdit" class="left">
+      <dt>Created:</dt>
+      <dd>{{ category.created | formatDate }}</dd>
+      <dt>Last Modified:</dt>
+      <dd>{{ category.updated | formatDate }}</dd>
+    </dl>
 
-      <button class="btn waves-effect waves-light right" type="submit" name="action">
-        Submit
-        <i class="material-icons right">send</i>
-      </button>
+    <button class="btn waves-effect waves-light right" type="submit" name="action">
+      Submit
+      <i class="material-icons right">send</i>
+    </button>
 
-      <router-link to="/categories">
-      <a id="back-button" class="waves-effect waves-light btn white teal-text right">
-        Back
-        <i class="material-icons teal-text left">arrow_back</i>
-      </a>
-      </router-link>
-    </form>
-  </div>
+    <router-link to="/categories">
+    <a id="back-button" class="waves-effect waves-light btn white teal-text right">
+      Back
+      <i class="material-icons teal-text left">arrow_back</i>
+    </a>
+    </router-link>
   </form>
 </div>
 </template>
@@ -50,6 +52,11 @@ export default {
   props: [
     'categoryId'
   ],
+  data() {
+    return {
+      errors: [],
+    }
+  },
   computed: {
     ...mapGetters([
       'category'
@@ -81,14 +88,30 @@ export default {
     ]),
 
     formSubmit(category) {
-      if (this.isAdd) {
-        this.addCategory(category);
-        this.$router.push('/categories/edit/' + category._id);
+      if (this.validateForm()) {
+        if (this.isAdd) {
+          this.addCategory(category);
+          this.$router.push('/categories/edit/' + category._id);
 
-      } else if (this.isEdit) {
-        this.editCategory(category);
-        this.$router.push('/categories');
+        } else if (this.isEdit) {
+          this.editCategory(category);
+          this.$router.push('/categories');
+        }
       }
+    },
+    
+    validateForm() {
+      if (this.category.name) {
+        return true;
+      }
+
+      this.errors = [];
+
+      if (!this.category.name) {
+        this.errors.push('Category name is required.');
+      }
+
+      return false;
     }
   },
   mixins: {
