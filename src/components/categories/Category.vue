@@ -28,6 +28,13 @@
         Submit
         <i class="material-icons right">send</i>
       </button>
+
+      <router-link to="/categories">
+      <a id="back-button" class="waves-effect waves-light btn white teal-text right">
+        Back
+        <i class="material-icons teal-text left">arrow_back</i>
+      </a>
+      </router-link>
     </form>
   </div>
   </form>
@@ -111,5 +118,8 @@ dl {
 }
 dd {
   margin: 0px 0px 20px 0px;
+}
+a#back-button {
+  margin-right: 20px;
 }
 </style>
