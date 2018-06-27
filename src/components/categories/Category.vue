@@ -27,17 +27,10 @@
       :updated="category.updated"
     ></meta-dates>
 
-    <button class="btn waves-effect waves-light right" type="submit" name="action">
-      Submit
-      <i class="material-icons right">send</i>
-    </button>
-
-    <router-link to="/categories">
-    <a id="back-button" class="waves-effect waves-light btn white teal-text right">
-      Back
-      <i class="material-icons teal-text left">arrow_back</i>
-    </a>
-    </router-link>
+    <button-set
+      backToUrl="/categories"
+      buttonSetType="form"
+    ></button-set>
   </form>
 </div>
 </template>
@@ -45,11 +38,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import MetaDates from '@/components/meta/Dates.vue'
+import ButtonSet from '@/components/page/ButtonSet.vue'
 
 export default {
   name: 'Category',
   components: {
-    MetaDates
+    MetaDates,
+    ButtonSet,
   },
   props: [
     'categoryId'
@@ -127,7 +122,4 @@ export default {
 </script>
 
 <style scoped>
-a#back-button {
-  margin-right: 20px;
-}
 </style>

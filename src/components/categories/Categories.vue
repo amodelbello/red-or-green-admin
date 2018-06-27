@@ -54,12 +54,10 @@
       </tr>
     </table>
 
-    <router-link to="/categories/add">
-      <a class="btn waves-effect waves-light right">
-        Create
-        <i class="material-icons right">add_circle</i>
-      </a>
-    </router-link>
+    <button-set
+      buttonSetType="create"
+      createUrl="/categories/add"
+    ></button-set>
   </div>
 
   <!-- Delete Modal -->
@@ -79,9 +77,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
+import ButtonSet from '@/components/page/ButtonSet.vue'
 
 export default {
   name: 'Categories',
+  components: {
+    ButtonSet,
+  },
   data() {
     return {
       modalInstance: null,
