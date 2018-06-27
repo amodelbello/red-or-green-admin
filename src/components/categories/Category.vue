@@ -21,12 +21,11 @@
       </div>
     </div>
 
-    <dl v-if="isEdit" class="left">
-      <dt>Created:</dt>
-      <dd>{{ category.created | formatDate }}</dd>
-      <dt>Last Modified:</dt>
-      <dd>{{ category.updated | formatDate }}</dd>
-    </dl>
+    <meta-dates 
+      :show="isEdit"
+      :created="category.created"
+      :updated="category.updated"
+    ></meta-dates>
 
     <button class="btn waves-effect waves-light right" type="submit" name="action">
       Submit
@@ -45,10 +44,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import format from '@/mixins/formatting.js'
+import MetaDates from '@/components/meta/Dates.vue'
 
 export default {
   name: 'Category',
+  components: {
+    MetaDates
+  },
   props: [
     'categoryId'
   ],
@@ -114,14 +116,6 @@ export default {
       return false;
     }
   },
-  mixins: {
-    format,
-  },
-  filters: {
-    formatDate(date) {
-      return format.formatDate(date);
-    },
-  },
   created() {
     if (this.categoryId !== undefined) {
       this.getCategory(this.categoryId);
@@ -133,15 +127,6 @@ export default {
 </script>
 
 <style scoped>
-dt {
-  color: #999;
-}
-dl {
-  margin-top: 0px;
-}
-dd {
-  margin: 0px 0px 20px 0px;
-}
 a#back-button {
   margin-right: 20px;
 }
