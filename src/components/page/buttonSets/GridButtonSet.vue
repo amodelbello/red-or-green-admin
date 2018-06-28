@@ -28,6 +28,18 @@
     >
     <i class="material-icons">delete</i>
   </a>
+
+  <!-- Delete Modal -->
+  <div :id="modalId" class="modal">
+    <div class="modal-content">
+      <h4 class="red-text">Are you sure?</h4>
+      <p>You are about to permanently delete "<em><strong>{{ item.name }}</strong></em>"</p>
+    </div>
+    <div class="modal-footer">
+      <a @click="deleteCancelled()" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+      <a @click="deleteConfirmed()" class="modal-close waves-effect waves-white btn red white-text">Delete</a>
+    </div>
+  </div>
 </span>
 </template>
 
@@ -43,19 +55,50 @@ export default {
     idFieldName() {
       return this.itemIdFieldName || '_id';
     },
+
     editUrl() {
       return this.itemEditPath + '/edit/' + this.item[this.idFieldName];
+    },
+
+    modalId() {
+      return 'delete-modal-' + this.item[this.idFieldName];
     }
   },
   methods: {
     deleteButtonClicked() {
-      this.$emit('deleteButtonClicked');
+      this.openModal();
+    }, 
+
+    deleteCancelled() {
+      this.closeModal();
+    },
+
+    deleteConfirmed() {
+      this.$emit('deleteConfirmed');
+      this.closeModal();
     },
 
     editButtonClicked() {
       this.$router.push(this.editUrl);
+    },
+
+    closeModal() {
+      this.modalInstance.close();
+    },
+
+    openModal() {
+      this.modalInstance.open();
     }
   },
+  mounted() {
+    // Delete Confirm Modal
+    // TODO: Probably move the below two lines into App.vue or some place where it will only be called once.
+    const elems = document.querySelectorAll('.modal');
+    const instances = M.Modal.init(elems, {});
+
+    const el = document.getElementById(this.modalId);
+    this.modalInstance = M.Modal.getInstance(el);
+  }
 }
 </script>
 

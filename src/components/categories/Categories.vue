@@ -14,7 +14,7 @@
           <grid-button-set
             :item="category"
             itemEditPath="/categories"
-            v-on:deleteButtonClicked="deleteConfirm(category._id)"
+            v-on:deleteConfirmed="deleteClick(category._id)"
           ></grid-button-set>
         </td>
 
@@ -27,17 +27,6 @@
     ></button-set>
   </div>
 
-  <!-- Delete Modal -->
-  <div id="delete-modal" class="modal">
-    <div class="modal-content">
-      <h4 class="red-text">Are you sure?</h4>
-      <p>You are about to permanently delete "<em><strong>{{ category.name }}</strong></em>"</p>
-    </div>
-    <div class="modal-footer">
-      <a @click="cancelClick()" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
-      <a @click="deleteClick(category._id)" class="modal-close waves-effect waves-white btn red white-text">Delete</a>
-    </div>
-  </div>
 </div>
 </template>
 
@@ -75,26 +64,9 @@ export default {
       'unsetCategory',
     ]),
 
-    deleteConfirm(categoryId) {
-      this.getCategory(categoryId);
-      this.openModal();
-    },
-
-    cancelClick() {
-      this.unsetCategory();
-    },
-
     deleteClick(categoryId) {
       this.deleteCategory(categoryId)
     },
-
-    closeModal() {
-      this.modalInstance.close();
-    },
-
-    openModal() {
-      this.modalInstance.open();
-    }
   },
   watch: {
     categories: function(newVal, oldVal) {
@@ -104,16 +76,7 @@ export default {
   created() {
     this.getCategories();
   },
-
-  mounted() {
-    // Modal
-    const elems = document.querySelectorAll('.modal');
-    const instances = M.Modal.init(elems, {});
-    const el = document.getElementById('delete-modal');
-    this.modalInstance = M.Modal.getInstance(el);
-  }
 }
-
 </script>
 
 <style scoped>
