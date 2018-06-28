@@ -24,7 +24,7 @@
       red 
       modal-trigger
     "
-    href="#delete-modal"
+    :href="modalIdWithHash"
     >
     <i class="material-icons">delete</i>
   </a>
@@ -62,7 +62,11 @@ export default {
 
     modalId() {
       return 'delete-modal-' + this.item[this.idFieldName];
-    }
+    },
+
+    modalIdWithHash() {
+      return '#delete-modal-' + this.item[this.idFieldName];
+    },
   },
   methods: {
     deleteButtonClicked() {
@@ -92,12 +96,8 @@ export default {
   },
   mounted() {
     // Delete Confirm Modal
-    // TODO: Probably move the below two lines into App.vue or some place where it will only be called once.
-    const elems = document.querySelectorAll('.modal');
-    const instances = M.Modal.init(elems, {});
-
     const el = document.getElementById(this.modalId);
-    this.modalInstance = M.Modal.getInstance(el);
+    this.modalInstance = M.Modal.init(el, {});
   }
 }
 </script>
