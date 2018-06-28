@@ -2,10 +2,7 @@
 <div class="row">
   <h1>Businesses</h1>
   <div v-if="loading" class="loading">
-    <h6>Loading...</h6>
-    <div class="progress">
-      <div class="indeterminate"></div>
-    </div>
+    <loading></loading>
   </div>
   <div v-else>
     <table>
@@ -25,10 +22,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
+import Loading from '@/components/page/Loading.vue';
 
 export default {
   name: 'Businesses',
   props: {
+  },
+  components: {
+    Loading,
   },
   data() {
     return {

@@ -2,10 +2,7 @@
 <div class="row">
   <h1>Categories</h1>
   <div v-if="loading" class="loading">
-    <h6>Loading...</h6>
-    <div class="progress">
-      <div class="indeterminate"></div>
-    </div>
+    <loading></loading>
   </div>
   <div v-else>
     <table>
@@ -47,12 +44,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
-import ButtonSet from '@/components/page/buttonSets/ButtonSet.vue'
-import GridButtonSet from '@/components/page/buttonSets/GridButtonSet.vue'
+import Loading from '@/components/page/Loading.vue';
+import ButtonSet from '@/components/page/buttonSets/ButtonSet.vue';
+import GridButtonSet from '@/components/page/buttonSets/GridButtonSet.vue';
 
 export default {
   name: 'Categories',
   components: {
+    Loading,
     ButtonSet,
     GridButtonSet,
   },
