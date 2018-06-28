@@ -6,7 +6,16 @@
   </button>
 
   <router-link :to="backToUrl">
-  <a id="back-button" class="waves-effect waves-light btn white teal-text right">
+  <a class="
+    waves-effect 
+    waves-light 
+    btn 
+    white 
+    teal-text 
+    right
+    back-button
+  "
+  >
     Back
     <i class="material-icons teal-text left">arrow_back</i>
   </a>
@@ -14,7 +23,14 @@
 </span>
 <span v-else-if="buttonSetType == 'create'">
   <router-link :to="createUrl">
-    <a class="btn waves-effect waves-light right">
+    <a class="
+      btn 
+      waves-effect 
+      waves-light 
+      right
+      create-button
+    "
+    >
       Create
       <i class="material-icons right">add_circle</i>
     </a>
@@ -34,8 +50,12 @@ export default {
 </script>
 
 <style scoped>
-a#back-button {
+a.back-button {
   margin-right: 20px;
+  margin-bottom: 40px;
+}
+a.create-button {
+  margin-bottom: 40px;
 }
 </style>
 
