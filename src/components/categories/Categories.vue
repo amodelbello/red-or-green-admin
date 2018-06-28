@@ -13,42 +13,12 @@
 
         <td>{{ category.name }}</td>
 
-        <td class="edit-button-cell">
-          <router-link 
-            :to="{ 
-              name: 'EditCategory', 
-              params: { categoryId: category._id }
-            }"
-          >
-            <a 
-              class="
-                btn-floating 
-                btn-small 
-                waves-effect 
-                waves-light 
-                right
-              ">
-                <i class="material-icons">edit</i>
-            </a>
-          </router-link>
-        </td>
-
-        <td class="delete-button-cell">
-          <a 
-            @click="deleteConfirm(category._id)" 
-            class="
-            btn-floating 
-            btn-small 
-            waves-effect 
-            waves-light 
-            right 
-            red 
-            modal-trigger
-            "
-            href="#delete-modal"
-          >
-            <i class="material-icons">delete</i>
-          </a>
+        <td class="button-set">
+          <grid-button-set
+            :item="category"
+            itemEditPath="/categories"
+            v-on:deleteButtonClicked="deleteConfirm(category._id)"
+          ></grid-button-set>
         </td>
 
       </tr>
@@ -77,12 +47,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
-import ButtonSet from '@/components/page/ButtonSet.vue'
+import ButtonSet from '@/components/page/buttonSets/ButtonSet.vue'
+import GridButtonSet from '@/components/page/buttonSets/GridButtonSet.vue'
 
 export default {
   name: 'Categories',
   components: {
     ButtonSet,
+    GridButtonSet,
   },
   data() {
     return {
@@ -146,9 +118,7 @@ export default {
 </script>
 
 <style scoped>
-td.edit-button-cell,
-td.delete-button-cell
-{
-  width:50px;
+td.button-set {
+  width:90px;
 }
 </style>

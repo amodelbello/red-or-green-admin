@@ -38,7 +38,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import MetaDates from '@/components/meta/Dates.vue'
-import ButtonSet from '@/components/page/ButtonSet.vue'
+import ButtonSet from '@/components/page/buttonSets/ButtonSet.vue'
 
 export default {
   name: 'Category',
