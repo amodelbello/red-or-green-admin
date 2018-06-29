@@ -32,8 +32,7 @@
         <label for="business.address.city" :class="{ active: business.address.city }">City</label>
       </div>
       <div class="input-field col s4">
-        <input type="text" id="business.address.state" v-model="business.address.state" class="validate">
-        <label for="business.address.state" :class="{ active: business.address.state }">State</label>
+        <state-select :value.sync="business.address.state"></state-select>
       </div>
       <div class="input-field col s4">
         <input type="text" id="business.address.zip" v-model="business.address.zip" class="validate">
@@ -59,12 +58,14 @@
 import { mapGetters, mapActions } from 'vuex';
 import MetaDates from '@/components/meta/Dates.vue'
 import ButtonSet from '@/components/page/form/ButtonSet.vue'
+import StateSelect from '@/components/page/form/StateSelect.vue'
 
 export default {
   name: 'Business',
   components: {
     MetaDates,
     ButtonSet,
+    StateSelect,
   },
   props: [
     'businessId'
