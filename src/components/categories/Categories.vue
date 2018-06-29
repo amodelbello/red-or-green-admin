@@ -34,8 +34,8 @@
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
 import Loading from '@/components/page/Loading.vue';
-import ButtonSet from '@/components/page/buttonSets/ButtonSet.vue';
-import GridButtonSet from '@/components/page/buttonSets/GridButtonSet.vue';
+import ButtonSet from '@/components/page/form/ButtonSet.vue';
+import GridButtonSet from '@/components/page/form/GridButtonSet.vue';
 
 export default {
   name: 'Categories',
