@@ -59,9 +59,7 @@ export default {
   methods: {
     ...mapActions([
       'getCategories',
-      'getCategory',
       'deleteCategory',
-      'unsetCategory',
     ]),
 
     deleteClick(categoryId) {

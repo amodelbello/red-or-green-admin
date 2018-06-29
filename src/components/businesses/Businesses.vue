@@ -83,8 +83,13 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getBusinesses'
+      'getBusinesses',
+      'deleteBusiness'
     ]),
+
+    deleteClick(businessId) {
+      this.deleteBusiness(businessId)
+    },
   },
   watch: {
     businesses: function(newVal, oldVal) {

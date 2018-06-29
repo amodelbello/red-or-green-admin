@@ -8,7 +8,12 @@ const state = {
 
 const getters = {
   businesses: state => state.businesses,
-  business: state => state.business,
+  business: (state) => {
+    if (state.business.address === null || state.business.address === undefined) {
+      state.business.address = {};
+    }
+    return state.business;
+  }
 };
 
 const mutations = {
@@ -53,6 +58,10 @@ const actions = {
     .catch(e => {
       console.log(e);
     });
+  },
+
+  unsetBusiness: ({commit}) => {
+    commit('SET_BUSINESS', {});
   },
 
   getBusiness: ({commit}, businessId) => {
