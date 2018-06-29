@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authMixin from '@/mixins/authentication.js'
 
 const state = {
   businesses: {},
