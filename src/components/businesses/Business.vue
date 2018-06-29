@@ -49,6 +49,8 @@
     <button-set
       backToUrl="/businesses"
       buttonSetType="form"
+      v-on:saveAndContinueClick="redirect = false"
+      v-on:saveClick="redirect = true"
     ></button-set>
   </form>
 </div>
@@ -73,6 +75,7 @@ export default {
   data() {
     return {
       errors: [],
+      redirect: true,
     }
   },
   computed: {
@@ -109,11 +112,19 @@ export default {
       if (this.validateForm()) {
         if (this.isAdd) {
           this.addBusiness(business);
-          this.$router.push('/businesses/edit/' + business._id);
+
+          if (this.redirect) {
+            this.$router.push('/businesses');
+          } else {
+            this.$router.push('/businesses/edit/' + business._id);
+          }
 
         } else if (this.isEdit) {
           this.editBusiness(business);
-          this.$router.push('/businesses');
+
+          if (this.redirect) {
+            this.$router.push('/businesses');
+          }
         }
       }
     },

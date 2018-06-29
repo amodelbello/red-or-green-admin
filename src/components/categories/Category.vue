@@ -30,6 +30,8 @@
     <button-set
       backToUrl="/categories"
       buttonSetType="form"
+      v-on:saveAndContinueClick="redirect = false"
+      v-on:saveClick="redirect = true"
     ></button-set>
   </form>
 </div>
@@ -52,6 +54,7 @@ export default {
   data() {
     return {
       errors: [],
+      redirect: true,
     }
   },
   computed: {
@@ -88,11 +91,19 @@ export default {
       if (this.validateForm()) {
         if (this.isAdd) {
           this.addCategory(category);
-          this.$router.push('/categories/edit/' + category._id);
+
+          if (this.redirect) {
+            this.$router.push('/categories');
+          } else {
+            this.$router.push('/categories/edit/' + category._id);
+          }
 
         } else if (this.isEdit) {
           this.editCategory(category);
-          this.$router.push('/categories');
+
+          if (this.redirect) {
+            this.$router.push('/categories');
+          }
         }
       }
     },

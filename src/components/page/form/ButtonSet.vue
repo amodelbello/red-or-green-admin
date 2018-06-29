@@ -1,8 +1,31 @@
 <template>
 <span v-if="buttonSetType == 'form'">
-  <button class="btn waves-effect waves-light right" type="submit" name="action">
-    Submit
-    <i class="material-icons right">send</i>
+  <button class="
+    btn 
+    waves-effect 
+    waves-light 
+    right
+    save-button
+    " 
+    type="submit" 
+    name="action"
+    @click="saveClick"
+  >
+    Save
+  </button>
+
+  <button class="
+    btn 
+    waves-effect 
+    waves-light 
+    right
+    save-button
+    " 
+    type="submit" 
+    name="action"
+    @click="saveAndContinueClick"
+  >
+    Save & Continue
   </button>
 
   <router-link :to="backToUrl">
@@ -45,13 +68,22 @@ export default {
     'buttonSetType',
     'backToUrl',
     'createUrl',
-  ]
+  ],
+  methods: {
+    saveClick() {
+      this.$emit('saveClick');
+    },
+    saveAndContinueClick() {
+      this.$emit('saveAndContinueClick');
+    },
+  }
 }
 </script>
 
 <style scoped>
-a.back-button {
-  margin-right: 20px;
+a.save-button, 
+button.save-button {
+  margin-left: 20px;
   margin-bottom: 40px;
 }
 a.create-button {
