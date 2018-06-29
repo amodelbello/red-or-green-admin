@@ -38,9 +38,13 @@ export default {
 }
 
 h1 {
+  font-size: 2rem;
   text-align: center;
 }
 
+a {
+  cursor: pointer;
+}
 main {
   /* sticky footer */
   flex: 1 0 auto;

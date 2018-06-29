@@ -6,33 +6,20 @@
   </div>
   <div v-else>
     <table>
-      <tr>
-        <th>Name</th>
-        <th>Red</th>
-        <th>Green</th>
-        <th>&nbsp;</th>
-      </tr>
       <tr v-for="(business, k) in businesses" :key="k">
 
         <td>{{ business.name }}</td>
 
-        <!--
-          TODO: Refactor this please... my god.
-        -->
         <td>
-          <span v-for="(rating, k) in business.ratings" :key="k">
-            <span v-if="rating.category.name == 'Red Chile'">
-              {{ rating.averageRating }}
-            </span>
-          </span>
+          <strong class="red-text">
+            {{ getChileRating(business, 'Red Chile') }}
+          </strong>
         </td>
 
         <td>
-          <span v-for="(rating, k) in business.ratings" :key="k">
-            <span v-if="rating.category.name == 'Green Chile'">
-              {{ rating.averageRating }}
-            </span>
-          </span>
+          <strong class="green-text">
+            {{ getChileRating(business, 'Green Chile') }}
+          </strong>
         </td>
 
         <td class="button-set">
@@ -58,6 +45,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
+import utility from '@/mixins/utility.js'
 import Loading from '@/components/page/Loading.vue';
 import ButtonSet from '@/components/page/form/ButtonSet.vue';
 import GridButtonSet from '@/components/page/form/GridButtonSet.vue';
@@ -70,6 +58,9 @@ export default {
     Loading,
     ButtonSet,
     GridButtonSet,
+  },
+  mixins: {
+    utility
   },
   data() {
     return {
@@ -90,6 +81,11 @@ export default {
     deleteClick(businessId) {
       this.deleteBusiness(businessId)
     },
+
+    getChileRating(business, category) {
+      return utility.findAverageRatingByCategoryName(business, category);
+    }
+
   },
   watch: {
     businesses: function(newVal, oldVal) {

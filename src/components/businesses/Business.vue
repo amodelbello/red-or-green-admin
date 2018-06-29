@@ -9,19 +9,21 @@
       </ul>
     </p>
     <div class="row">
-      <div class="input-field col s12">
+      <div class="input-field col s6">
         <input type="text" id="business.name" v-model="business.name" class="validate">
         <label for="business.name" :class="{ active: business.name }">Name</label>
       </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" id="business.address.street" v-model="business.address.street" class="validate">
-        <label for="business.address.street" :class="{ active: business.address.street }">Address</label>
+      <div v-if="isEdit" class="input-field col s3 offset-s2">
+        <div class="chile-rating red-text left">Red: {{ getChileRating('Red Chile') }}</div>
+        <div class="chile-rating green-text right">Green: {{ getChileRating('Green Chile') }}</div>
       </div>
     </div>
     <div class="row">
-      <div class="input-field col s12">
+      <div class="input-field col s6">
+        <input type="text" id="business.address.street" v-model="business.address.street" class="validate">
+        <label for="business.address.street" :class="{ active: business.address.street }">Address</label>
+      </div>
+      <div class="input-field col s6">
         <input type="text" id="business.address.street2" v-model="business.address.street2" class="validate">
         <label for="business.address.street2" :class="{ active: business.address.street2 }">Address 2</label>
       </div>
@@ -58,6 +60,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import utility from '@/mixins/utility.js'
 import MetaDates from '@/components/meta/Dates.vue'
 import ButtonSet from '@/components/page/form/ButtonSet.vue'
 import StateSelect from '@/components/page/form/StateSelect.vue'
@@ -77,6 +80,9 @@ export default {
       errors: [],
       redirect: true,
     }
+  },
+  mixins: {
+    utility
   },
   computed: {
     ...mapGetters([
@@ -107,6 +113,10 @@ export default {
       'editBusiness',
       'unsetBusiness',
     ]),
+
+    getChileRating(category) {
+      return utility.findAverageRatingByCategoryName(this.business, category);
+    },
 
     formSubmit(business) {
       if (this.validateForm()) {
@@ -154,4 +164,7 @@ export default {
 </script>
 
 <style scoped>
+div.chile-rating {
+  font-size: 1.2em;
+}
 </style>

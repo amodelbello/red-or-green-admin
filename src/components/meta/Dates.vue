@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import format from '@/mixins/formatting.js'
+import utility from '@/mixins/utility.js'
 
 export default {
   name: 'MetaDates',
@@ -19,11 +19,11 @@ export default {
   ],
 
   mixins: {
-    format,
+    utility,
   },
   filters: {
     formatDate(date) {
-      return format.formatDate(date);
+      return utility.formatDate(date);
     },
   },
 }
