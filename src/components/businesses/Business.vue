@@ -9,13 +9,13 @@
       </ul>
     </p>
     <div class="row">
-      <div class="input-field col s6">
+      <div class="input-field col" :class="{ s12: isAdd, s6: isEdit }">
         <input type="text" id="business.name" v-model="business.name" class="validate">
         <label for="business.name" :class="{ active: business.name }">Name</label>
       </div>
-      <div v-if="isEdit" class="input-field col s3 offset-s2">
-        <div class="chile-rating red-text left">Red: {{ getChileRating('Red Chile') }}</div>
-        <div class="chile-rating green-text right">Green: {{ getChileRating('Green Chile') }}</div>
+      <div v-if="isEdit" class="input-field col s4 offset-s1">
+        <strong class="chile-rating red-text left">Red: {{ getChileRating('Red Chile') }}</strong>
+        <strong class="chile-rating green-text right">Green: {{ getChileRating('Green Chile') }}</strong>
       </div>
     </div>
     <div class="row">
@@ -24,8 +24,8 @@
         <label for="business.address.street" :class="{ active: business.address.street }">Address</label>
       </div>
       <div class="input-field col s6">
-        <input type="text" id="business.address.street2" v-model="business.address.street2" class="validate">
-        <label for="business.address.street2" :class="{ active: business.address.street2 }">Address 2</label>
+        <input type="text" id="business.phone" v-model="business.phone" class="validate">
+        <label for="business.phone" :class="{ active: business.phone }">Phone</label>
       </div>
     </div>
     <div class="row">
@@ -164,7 +164,7 @@ export default {
 </script>
 
 <style scoped>
-div.chile-rating {
-  font-size: 1.2em;
+strong.chile-rating {
+  font-size: 1.6em;
 }
 </style>
