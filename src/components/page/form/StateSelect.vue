@@ -7,7 +7,6 @@
       v-for="(state, k) in states" 
       :key="k" 
       :value="state.abbreviation" 
-      :selected="true"
     >{{ state.name }}</option>
 
   </select>

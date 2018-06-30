@@ -18,29 +18,37 @@
         <strong class="chile-rating green-text right">Green: {{ getChileRating('Green Chile') }}</strong>
       </div>
     </div>
-    <div class="row">
-      <div class="input-field col s6">
-        <input type="text" id="business.address.street" v-model="business.address.street" class="validate">
-        <label for="business.address.street" :class="{ active: business.address.street }">Address</label>
-      </div>
-      <div class="input-field col s6">
-        <input type="text" id="business.phone" v-model="business.phone" class="validate">
-        <label for="business.phone" :class="{ active: business.phone }">Phone</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s4">
-        <input type="text" id="business.address.city" v-model="business.address.city" class="validate">
-        <label for="business.address.city" :class="{ active: business.address.city }">City</label>
-      </div>
-      <div class="input-field col s4">
-        <state-select :value.sync="business.address.state"></state-select>
-      </div>
-      <div class="input-field col s4">
-        <input type="text" id="business.address.zip" v-model="business.address.zip" class="validate">
-        <label for="business.address.zip" :class="{ active: business.address.zip }">Zip</label>
-      </div>
-    </div>
+
+    <ul class="collapsible" id="business-info">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">info_outline</i>Info</div>
+        <div class="collapsible-body">
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text" id="business.address.street" v-model="business.address.street" class="validate">
+              <label for="business.address.street" :class="{ active: business.address.street }">Address</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="text" id="business.phone" v-model="business.phone" class="validate">
+              <label for="business.phone" :class="{ active: business.phone }">Phone</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <input type="text" id="business.address.city" v-model="business.address.city" class="validate">
+              <label for="business.address.city" :class="{ active: business.address.city }">City</label>
+            </div>
+            <div class="input-field col s4">
+              <state-select :value.sync="business.address.state"></state-select>
+            </div>
+            <div class="input-field col s4">
+              <input type="text" id="business.address.zip" v-model="business.address.zip" class="validate">
+              <label for="business.address.zip" :class="{ active: business.address.zip }">Zip</label>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
 
     <meta-dates 
       :show="isEdit"
@@ -159,6 +167,10 @@ export default {
     } else {
       this.unsetBusiness();
     }
+  },
+  mounted() {
+    const el = document.getElementById('business-info');
+    const addressFields = M.Collapsible.init(el, {});
   }
 }
 </script>
@@ -166,5 +178,8 @@ export default {
 <style scoped>
 strong.chile-rating {
   font-size: 1.6em;
+}
+.collapsible {
+  margin-bottom: 40px;
 }
 </style>

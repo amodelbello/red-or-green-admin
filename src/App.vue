@@ -54,6 +54,14 @@ button, a.btn {
   margin-top: 40px;
 }
 
+button:focus,
+div:focus,
+ul:focus,
+li:focus
+{
+  outline: none;
+}
+
 div.loading {
   margin-top: 40px;
   text-align: center;
