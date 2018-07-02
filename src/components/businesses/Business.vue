@@ -20,6 +20,43 @@
     </div>
 
     <ul class="collapsible" id="business-info">
+      <li class="active">
+        <div class="collapsible-header"><i class="material-icons">rate_review</i>Ratings</div>
+        <div class="collapsible-body">
+          <div class="row">
+            <div class="input-field col s6">
+              <table>
+                <tr>
+                  <th colspan="3">Red</th>
+                </tr>
+                <tr v-for="(rating, k) in redRatings" :key="k">
+                  <td>{{ rating.updated | formatDate }}</td>
+                  <td>{{ rating.comments | truncateText}}</td>
+                  <td class="red-text"><strong>{{ rating.rating }}</strong></td>
+                </tr>
+                <tr v-if="redRatings.length === 0">
+                  <td colspan="3" class="grey-text">(no ratings yet)</td>
+                </tr>
+              </table>
+            </div>
+            <div class="input-field col s6">
+              <table>
+                <tr>
+                  <th colspan="3">Green</th>
+                </tr>
+                <tr v-for="(rating, k) in greenRatings" :key="k">
+                  <td>{{ rating.updated | formatDate }}</td>
+                  <td>{{ rating.comments | truncateText }}</td>
+                  <td class="green-text"><strong>{{ rating.rating }}</strong></td>
+                </tr>
+                <tr v-if="greenRatings.length === 0">
+                  <td colspan="3" class="grey-text">(no ratings yet)</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </li>
       <li>
         <div class="collapsible-header"><i class="material-icons">info_outline</i>Info</div>
         <div class="collapsible-body">
@@ -49,6 +86,8 @@
         </div>
       </li>
     </ul>
+
+
 
     <meta-dates 
       :show="isEdit"
@@ -87,14 +126,25 @@ export default {
     return {
       errors: [],
       redirect: true,
+      redRatings: [],
+      greenRatings: [],
     }
   },
   mixins: {
-    utility
+    utility,
+  },
+  filters: {
+    formatDate(date) {
+      return utility.formatDate(date, 'M/DD/YYYY');
+    },
+    truncateText(text) {
+      return utility.truncateText(text, 20, true)
+    }
   },
   computed: {
     ...mapGetters([
-      'business'
+      'business',
+      'ratings',
     ]),
 
     isAdd() {
@@ -113,6 +163,7 @@ export default {
       }
     },
 
+
   },
   methods: {
     ...mapActions([
@@ -120,6 +171,7 @@ export default {
       'addBusiness',
       'editBusiness',
       'unsetBusiness',
+      'getRatings',
     ]),
 
     getChileRating(category) {
@@ -159,11 +211,38 @@ export default {
       }
 
       return false;
+    },
+
+    getGreenRatings() {
+      const greenRatings = this.ratings.filter((rating) => {
+        if (rating.category.name === 'Green Chile') {
+          return true;
+        }
+        return false;
+      });
+      this.greenRatings = greenRatings;
+      return greenRatings;
+    },
+
+    getRedRatings() {
+      const redRatings = this.ratings.filter((rating) => {
+        if (rating.category.name === 'Red Chile') {
+          return true;
+        }
+        return false;
+      });
+      this.redRatings = redRatings;
+      return redRatings;
     }
   },
+
   created() {
     if (this.businessId !== undefined) {
       this.getBusiness(this.businessId);
+      this.getRatings(this.businessId).then(() => {
+        this.getGreenRatings();
+        this.getRedRatings();
+      });
     } else {
       this.unsetBusiness();
     }

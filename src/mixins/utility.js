@@ -1,8 +1,29 @@
+const moment = require('moment');
+
 export default {
 
-  formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleString('en-US');
+  formatDate(dateString, format = null) {
+    if (format !== null) {
+      return moment(dateString).format(format);
+    } else {
+      const date = new Date(dateString);
+      return date.toLocaleString('en-US');
+    }
+  },
+
+  truncateText(text, limit = 20, addEllipsis = true) {
+    const length = text.length;
+    if (length <= limit) {
+      return text;
+    }
+
+    let truncatedText = text.substring(0, limit);
+
+    if (addEllipsis) {
+      truncatedText += '...';
+    }
+
+    return truncatedText;
   },
 
   findAverageRatingByCategoryName(business, categoryName) {

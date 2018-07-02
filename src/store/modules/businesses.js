@@ -51,7 +51,7 @@ const mutations = {
 
 const actions = {
   getBusinesses: ({commit}) => {
-    axios.get(process.env.VUE_APP_API_HOST + '/api/businesses')
+    return axios.get(process.env.VUE_APP_API_HOST + '/api/businesses')
     .then((response) => {
       commit('SET_BUSINESSES', response.data.data);
     })
@@ -65,7 +65,7 @@ const actions = {
   },
 
   getBusiness: ({commit}, businessId) => {
-    axios.get(
+    return axios.get(
       process.env.VUE_APP_API_HOST + '/api/businesses/' + businessId, 
       authMixin.getHttpAuthHeader()
     )
@@ -78,7 +78,7 @@ const actions = {
   },
 
   editBusiness: ({commit}, business) => {
-    axios.put(
+    return axios.put(
       process.env.VUE_APP_API_HOST + '/api/businesses/' + business._id, 
       business,
       authMixin.getHttpAuthHeader()
@@ -92,7 +92,7 @@ const actions = {
   },
 
   addBusiness: ({commit}, business) => {
-    axios.post(
+    return axios.post(
       process.env.VUE_APP_API_HOST + '/api/businesses', 
       business,
       authMixin.getHttpAuthHeader()
@@ -106,7 +106,7 @@ const actions = {
   },
 
   deleteBusiness: ({commit}, businessId) => {
-    axios.delete(
+    return axios.delete(
       process.env.VUE_APP_API_HOST + '/api/businesses/' + businessId, 
       authMixin.getHttpAuthHeader()
     )

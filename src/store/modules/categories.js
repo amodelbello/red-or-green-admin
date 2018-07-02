@@ -46,7 +46,7 @@ const mutations = {
 
 const actions = {
   getCategories: ({commit}) => {
-    axios.get(
+    return axios.get(
       process.env.VUE_APP_API_HOST + '/api/categories', 
       authMixin.getHttpAuthHeader()
     )
@@ -63,7 +63,7 @@ const actions = {
   },
 
   getCategory: ({commit}, categoryId) => {
-    axios.get(
+    return axios.get(
       process.env.VUE_APP_API_HOST + '/api/categories/' + categoryId, 
       authMixin.getHttpAuthHeader()
     )
@@ -76,7 +76,7 @@ const actions = {
   },
 
   editCategory: ({commit}, category) => {
-    axios.put(
+    return axios.put(
       process.env.VUE_APP_API_HOST + '/api/categories/' + category._id, 
       category,
       authMixin.getHttpAuthHeader()
@@ -90,7 +90,7 @@ const actions = {
   },
 
   addCategory: ({commit}, category) => {
-    axios.post(
+    return axios.post(
       process.env.VUE_APP_API_HOST + '/api/categories', 
       category,
       authMixin.getHttpAuthHeader()
@@ -104,7 +104,7 @@ const actions = {
   },
 
   deleteCategory: ({commit}, categoryId) => {
-    axios.delete(
+    return axios.delete(
       process.env.VUE_APP_API_HOST + '/api/categories/' + categoryId, 
       authMixin.getHttpAuthHeader()
     )
