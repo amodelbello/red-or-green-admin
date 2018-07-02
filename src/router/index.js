@@ -9,10 +9,11 @@ import categoryRoutes from './categories';
 
 Vue.use(Router);
 
-const routes = []
-.concat(authRoutes)
-.concat(businessRoutes)
-.concat(categoryRoutes)
+const routes = [
+  ...authRoutes,
+  ...businessRoutes,
+  ...categoryRoutes,
+]
 .concat([
   {
     path: '*',
