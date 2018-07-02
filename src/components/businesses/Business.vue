@@ -256,7 +256,7 @@ export default {
 
 <style scoped>
 strong.chile-rating {
-  font-size: 1.6em;
+  font-size: 1.4em;
 }
 .collapsible {
   margin-bottom: 40px;

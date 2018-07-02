@@ -11,6 +11,13 @@ export default {
     }
   },
 
+  formatDecimal(value, decimalPlaces = 2) {
+    value = value.toFixed(decimalPlaces);
+    value = parseFloat(value);
+
+    return value;
+  },
+
   truncateText(text, limit = 20, addEllipsis = true) {
     const length = text.length;
     if (length <= limit) {
@@ -26,9 +33,9 @@ export default {
     return truncatedText;
   },
 
-  findAverageRatingByCategoryName(business, categoryName) {
-    if (business.ratings === null || business.ratings === undefined) {
-      return null;
+  findAverageRatingByCategoryName(business, categoryName, decimalPlaces = 2) {
+    if (business.ratings === null || business.ratings === undefined || business.ratings.length === 0) {
+      return '--';
     }
 
     const rating = business.ratings.find((rating) => {
@@ -36,7 +43,7 @@ export default {
     });
 
     if (rating !== null && rating !== undefined) {
-      return rating.averageRating || 0;
+      return this.formatDecimal(rating.averageRating, decimalPlaces) || '--';
     }
   },
 }
