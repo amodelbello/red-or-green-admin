@@ -54,7 +54,7 @@ const actions = {
       commit('SET_CATEGORIES', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -71,7 +71,7 @@ const actions = {
       commit('SET_CATEGORY', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -85,7 +85,7 @@ const actions = {
       commit('EDIT_CATEGORY', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -99,7 +99,7 @@ const actions = {
       commit('ADD_CATEGORY', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -112,7 +112,7 @@ const actions = {
       commit('DELETE_CATEGORY', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 };

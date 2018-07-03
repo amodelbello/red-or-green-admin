@@ -8,7 +8,7 @@ const state = {
 
 const getters = {
   businesses: state => state.businesses,
-  business: (state) => {
+  business: state => {
     if (state.business.address === null || state.business.address === undefined) {
       state.business.address = {};
     }
@@ -56,7 +56,7 @@ const actions = {
       commit('SET_BUSINESSES', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -73,7 +73,7 @@ const actions = {
       commit('SET_BUSINESS', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -87,7 +87,7 @@ const actions = {
       commit('EDIT_BUSINESS', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -101,7 +101,7 @@ const actions = {
       commit('ADD_BUSINESS', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -114,7 +114,7 @@ const actions = {
       commit('DELETE_BUSINESS', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 };

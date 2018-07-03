@@ -6,6 +6,7 @@ import authMixin from '@/mixins/authentication.js'
 import authRoutes from './authentication';
 import businessRoutes from './businesses';
 import categoryRoutes from './categories';
+import userRoutes from './users';
 
 Vue.use(Router);
 
@@ -13,6 +14,7 @@ const routes = [
   ...authRoutes,
   ...businessRoutes,
   ...categoryRoutes,
+  ...userRoutes,
 ]
 .concat([
   {

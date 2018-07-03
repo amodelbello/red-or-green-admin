@@ -51,7 +51,7 @@ const actions = {
       commit('SET_RATINGS', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -68,7 +68,7 @@ const actions = {
       commit('SET_RATING', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -82,7 +82,7 @@ const actions = {
       commit('EDIT_RATING', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -96,7 +96,7 @@ const actions = {
       commit('ADD_RATING', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 
@@ -109,7 +109,7 @@ const actions = {
       commit('DELETE_RATING', response.data.data);
     })
     .catch(e => {
-      console.log(e);
+      console.log(e.response);
     });
   },
 };
