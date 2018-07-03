@@ -24,6 +24,7 @@
         <td class="button-set">
           <grid-button-set
             :item="user"
+            itemNameFieldName="username"
             itemEditPath="/users"
             v-on:deleteConfirmed="deleteClick(user._id)"
           ></grid-button-set>

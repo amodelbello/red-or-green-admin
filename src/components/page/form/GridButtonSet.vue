@@ -33,7 +33,7 @@
   <div :id="modalId" class="modal">
     <div class="modal-content">
       <h4 class="red-text">Are you sure?</h4>
-      <p>You are about to permanently delete "<em><strong>{{ item.name }}</strong></em>"</p>
+      <p>You are about to permanently delete "<em><strong>{{ item[nameFieldName] }}</strong></em>"</p>
     </div>
     <div class="modal-footer">
       <a @click="deleteCancelled()" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
@@ -49,11 +49,16 @@ export default {
   props: [
     'item',
     'itemIdFieldName',
+    'itemNameFieldName',
     'itemEditPath',
   ],
   computed: {
     idFieldName() {
       return this.itemIdFieldName || '_id';
+    },
+
+    nameFieldName() {
+      return this.itemNameFieldName || 'name'
     },
 
     editUrl() {
