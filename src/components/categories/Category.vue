@@ -109,11 +109,11 @@ export default {
     },
     
     validateForm() {
+      this.errors = [];
+
       if (this.category.name) {
         return true;
       }
-
-      this.errors = [];
 
       if (!this.category.name) {
         this.errors.push('Category name is required.');

@@ -200,11 +200,11 @@ export default {
     },
     
     validateForm() {
+      this.errors = [];
+
       if (this.business.name) {
         return true;
       }
-
-      this.errors = [];
 
       if (!this.business.name) {
         this.errors.push('Business name is required.');

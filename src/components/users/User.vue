@@ -168,11 +168,11 @@ export default {
     },
     
     validateForm() {
+      this.errors = [];
+
       if (this.user.username) {
         return true;
       }
-
-      this.errors = [];
 
       if (!this.user.username) {
         this.errors.push('Username is required.');
