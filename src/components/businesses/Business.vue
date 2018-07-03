@@ -20,7 +20,7 @@
     </div>
 
     <ul class="collapsible" id="business-info">
-      <li class="active">
+      <li :class="{ active: isEdit }">
         <div class="collapsible-header"><i class="material-icons">rate_review</i>Ratings</div>
         <div class="collapsible-body">
           <div class="row">
@@ -57,7 +57,7 @@
           </div>
         </div>
       </li>
-      <li>
+      <li :class="{ active: isAdd }">
         <div class="collapsible-header"><i class="material-icons">info_outline</i>Info</div>
         <div class="collapsible-body">
           <div class="row">
@@ -86,8 +86,6 @@
         </div>
       </li>
     </ul>
-
-
 
     <meta-dates 
       :show="isEdit"
