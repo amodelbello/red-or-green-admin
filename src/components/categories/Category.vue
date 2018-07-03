@@ -90,20 +90,22 @@ export default {
     formSubmit(category) {
       if (this.validateForm()) {
         if (this.isAdd) {
-          this.addCategory(category);
-
-          if (this.redirect) {
-            this.$router.push('/categories');
-          } else {
-            this.$router.push('/categories/edit/' + category._id);
-          }
+          this.addCategory(category)
+          .then(() => {
+            if (this.redirect) {
+              this.$router.push('/categories');
+            } else {
+              this.$router.push('/categories/edit/' + this.category._id);
+            }
+          });
 
         } else if (this.isEdit) {
-          this.editCategory(category);
-
-          if (this.redirect) {
-            this.$router.push('/categories');
-          }
+          this.editCategory(category)
+          .then(() => {
+            if (this.redirect) {
+              this.$router.push('/categories');
+            }
+          });
         }
       }
     },

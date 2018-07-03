@@ -179,20 +179,22 @@ export default {
     formSubmit(business) {
       if (this.validateForm()) {
         if (this.isAdd) {
-          this.addBusiness(business);
-
-          if (this.redirect) {
-            this.$router.push('/businesses');
-          } else {
-            this.$router.push('/businesses/edit/' + business._id);
-          }
+          this.addBusiness(business)
+          .then(() => {
+            if (this.redirect) {
+              this.$router.push('/businesses');
+            } else {
+              this.$router.push('/businesses/edit/' + this.business._id);
+            }
+          });
 
         } else if (this.isEdit) {
-          this.editBusiness(business);
-
-          if (this.redirect) {
-            this.$router.push('/businesses');
-          }
+          this.editBusiness(business)
+          .then(() => {
+            if (this.redirect) {
+              this.$router.push('/businesses');
+            }
+          });
         }
       }
     },

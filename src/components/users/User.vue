@@ -149,20 +149,22 @@ export default {
     formSubmit(user) {
       if (this.validateForm()) {
         if (this.isAdd) {
-          this.addUser(user);
-
-          if (this.redirect) {
-            this.$router.push('/users');
-          } else {
-            this.$router.push('/users/edit/' + user._id);
-          }
+          this.addUser(user)
+          .then(() => {
+            if (this.redirect) {
+              this.$router.push('/users');
+            } else {
+              this.$router.push('/users/edit/' + this.user._id);
+            }
+          });
 
         } else if (this.isEdit) {
-          this.editUser(user);
-
-          if (this.redirect) {
-            this.$router.push('/users');
-          }
+          this.editUser(user)
+          .then(() => {
+            if (this.redirect) {
+              this.$router.push('/users');
+            }
+          });
         }
       }
     },
