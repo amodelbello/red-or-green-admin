@@ -1,18 +1,31 @@
 import Users from '@/components/users/Users';
 import User from '@/components/users/User';
 
+import authMixin from '@/mixins/authentication.js'
+
+const userIsSuper = (to, from, next) => {
+  const role = authMixin.getUserRole();
+  if (role === 'super') {
+    next();
+  } else {
+    next('/login')
+  }
+}
+
 export default [
     {
       path: '/users',
       name: 'Users',
       component: Users,
-      props: true
+      props: true,
+      beforeEnter: userIsSuper,
     },
     {
       path: '/users/add',
       name: 'AddUser',
       component: User,
-      props: true
+      props: true,
+      beforeEnter: userIsSuper,
     },
     {
       path: '/users/edit/:userId',
