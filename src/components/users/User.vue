@@ -53,7 +53,27 @@
         <label for="user.address.zip" :class="{ active: user.address.zip }">Zip</label>
       </div>
     </div>
+
     <div class="row">
+      <div class="input-field col s6">
+        <select id="role-select" v-model="user.role" class="browser-default">
+          <option value="" disabled>Choose Role</option>
+          <option value="default" :selected="user.role == 'default'">Default</option>
+          <option value="admin" :selected="user.role == 'admin'">Admin</option>
+          <option value="super" :selected="user.role == 'super'">Super</option>
+        </select>
+        <label class="active default-label">User Role</label>
+      </div>
+    </div>
+
+    <div v-if="isAdd" class="row">
+      <div class="input-field col s6">
+        <input type="password" id="user.password" v-model="user.password" class="validate">
+        <label for="user.password" :class="{ active: user.password }">Password</label>
+      </div>
+    </div>
+
+    <div v-if="isEdit" class="row">
       <div class="input-field col s4">
         <a class="waves-effect waves-light btn-small grey lighten-4 black-text" @click="togglePasswordField()">Change Password</a>
       </div>
@@ -197,9 +217,16 @@ export default {
     } else {
       this.unsetUser();
     }
+  },
+  mounted() {
+    const el = document.getElementById('role-select');
+    const instance = M.FormSelect.init(el, {});
   }
 }
 </script>
 
 <style scoped>
+select.browser-default {
+  margin-top: 10px;
+}
 </style>
