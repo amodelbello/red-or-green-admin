@@ -5,13 +5,13 @@ const getAuthToken = () => {
 };
 
 const getTokenPayload = () => {
-    const token = getAuthToken();
-    if (token) {
-      const payload = JSON.parse(window.atob(token.split('.')[1]));
-      return payload;
-    } else {
-      return null;
-    }
+  const token = getAuthToken();
+  if (token) {
+    const payload = JSON.parse(window.atob(token.split('.')[1]));
+    return payload;
+  } else {
+    return null;
+  }
 };
 
 export default {

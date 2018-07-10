@@ -1,5 +1,6 @@
 import router from '../../router'
 import axios from 'axios';
+import authMixin from '@/mixins/authentication.js'
 
 const state = {
   authToken: localStorage.getItem('token')
@@ -31,6 +32,14 @@ const actions = {
       const token = response.data.data.token;
       localStorage.setItem('token', token);
       commit('LOGIN', token);
+
+      // only allow super and admin roles
+      const userRole = authMixin.getUserRole();
+      if (userRole !== 'super' && userRole !== 'admin') {
+        dispatch('logout');
+        reject();
+      }
+
       router.push('/businesses');
     });
 
