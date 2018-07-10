@@ -126,6 +126,7 @@ export default {
       redirect: true,
       redRatings: [],
       greenRatings: [],
+      collapsible: null,
     }
   },
   mixins: {
@@ -186,6 +187,7 @@ export default {
             } else {
               this.$router.push('/businesses/edit/' + this.business._id);
               utility.showToast('Business created.');
+              this.collapsible.open(0);
             }
           });
 
@@ -252,7 +254,7 @@ export default {
   },
   mounted() {
     const el = document.getElementById('business-info');
-    const addressFields = M.Collapsible.init(el, {});
+    this.collapsible = M.Collapsible.init(el, {});
   }
 }
 </script>
