@@ -38,10 +38,25 @@ export default {
   getUserRole() {
     const payload = getTokenPayload();
     if (payload !== null) {
-      const userRole = getTokenPayload().role;
+      const userRole = payload.role;
       return userRole;
     } else {
       return null;
     }
-  }
+  },
+
+  getDisplayName() {
+    const payload = getTokenPayload();
+    if (payload !== null) {
+      let displayName = 'User';
+      if (payload.firstName) {
+        displayName = payload.firstName;
+      } else if (payload.username) {
+        displayName = payload.username;
+      }
+      return displayName;
+    } else {
+      return null;
+    }
+  },
 }
