@@ -1,6 +1,6 @@
 <template>
 <span>
-  <select :id="idField" :value="value" @change="newStateSelected">
+  <select :id="idField" :value="value" @change="newStateSelected" class="browser-default">
     <option value="" disabled>Select State</option>
 
     <option 
@@ -10,7 +10,6 @@
     >{{ state.name }}</option>
 
   </select>
-  <label>State</label>
 </span>
 </template>
 
