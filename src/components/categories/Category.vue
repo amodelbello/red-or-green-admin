@@ -39,6 +39,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import utility from '@/mixins/utility.js'
 import MetaDates from '@/components/meta/Dates.vue'
 import ButtonSet from '@/components/page/form/ButtonSet.vue'
 
@@ -51,6 +52,9 @@ export default {
   props: [
     'categoryId'
   ],
+  mixins: {
+    utility,
+  },
   data() {
     return {
       errors: [],
@@ -96,6 +100,7 @@ export default {
               this.$router.push('/categories');
             } else {
               this.$router.push('/categories/edit/' + this.category._id);
+              utility.showToast('Category created.');
             }
           });
 
@@ -105,10 +110,7 @@ export default {
             if (this.redirect) {
               this.$router.push('/categories');
             } else {
-              M.toast({
-                html: 'Category saved.',
-                classes: 'teal'
-              });
+              utility.showToast('Category saved.');
             }
           });
         }

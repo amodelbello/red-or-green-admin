@@ -46,4 +46,11 @@ export default {
       return this.formatDecimal(rating.averageRating, decimalPlaces) || '--';
     }
   },
+
+  showToast(message = 'Item saved', classes = 'teal') {
+    M.toast({
+      html: message,
+      classes: classes,
+    });
+  },
 }

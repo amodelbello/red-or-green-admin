@@ -81,6 +81,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import utility from '@/mixins/utility.js'
 import MetaDates from '@/components/meta/Dates.vue'
 import ButtonSet from '@/components/page/form/ButtonSet.vue'
 import StateSelect from '@/components/page/form/StateSelect.vue'
@@ -95,6 +96,9 @@ export default {
   props: [
     'userId'
   ],
+  mixins: {
+    utility,
+  },
   data() {
     return {
       errors: [],
@@ -155,6 +159,7 @@ export default {
               this.$router.push('/users');
             } else {
               this.$router.push('/users/edit/' + this.user._id);
+              utility.showToast('User created.');
             }
           });
 
@@ -164,10 +169,7 @@ export default {
             if (this.redirect) {
               this.$router.push('/users');
             } else {
-              M.toast({
-                html: 'User saved.',
-                classes: 'teal'
-              });
+              utility.showToast('User saved.');
             } 
           });
         }

@@ -185,6 +185,7 @@ export default {
               this.$router.push('/businesses');
             } else {
               this.$router.push('/businesses/edit/' + this.business._id);
+              utility.showToast('Business created.');
             }
           });
 
@@ -194,10 +195,7 @@ export default {
             if (this.redirect) {
               this.$router.push('/businesses');
             } else {
-              M.toast({
-                html: 'Business saved.',
-                classes: 'teal'
-              });
+              utility.showToast('Business saved.');
             } 
           });
         }
