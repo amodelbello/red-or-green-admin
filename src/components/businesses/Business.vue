@@ -193,7 +193,12 @@ export default {
           .then(() => {
             if (this.redirect) {
               this.$router.push('/businesses');
-            }
+            } else {
+              M.toast({
+                html: 'Business saved.',
+                classes: 'teal'
+              });
+            } 
           });
         }
       }

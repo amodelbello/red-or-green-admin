@@ -104,6 +104,11 @@ export default {
           .then(() => {
             if (this.redirect) {
               this.$router.push('/categories');
+            } else {
+              M.toast({
+                html: 'Category saved.',
+                classes: 'teal'
+              });
             }
           });
         }

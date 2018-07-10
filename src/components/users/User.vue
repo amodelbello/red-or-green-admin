@@ -163,7 +163,12 @@ export default {
           .then(() => {
             if (this.redirect) {
               this.$router.push('/users');
-            }
+            } else {
+              M.toast({
+                html: 'User saved.',
+                classes: 'teal'
+              });
+            } 
           });
         }
       }
