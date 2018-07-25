@@ -65,7 +65,10 @@
             <!-- Modal Structure -->
             <div id="ratings-modal" class="modal">
               <div class="modal-content">
-                <rating :businessId="business._id"></rating>
+                <rating 
+                  :businessId="business._id"
+                  v-on:ratingChanged="refreshRatings()"
+                ></rating>
               </div>
             </div>
           </div>
@@ -255,16 +258,24 @@ export default {
       });
       this.redRatings = redRatings;
       return redRatings;
+    },
+
+    refreshRatings() {
+      this.getRatings(this.businessId).then(() => {
+        this.getGreenRatings();
+        this.getRedRatings();
+      });
+
+      if (this.ratingModalInstance !== undefined) {
+        this.ratingModalInstance.close(); 
+      }
     }
   },
 
   created() {
     if (this.businessId !== undefined) {
       this.getBusiness(this.businessId);
-      this.getRatings(this.businessId).then(() => {
-        this.getGreenRatings();
-        this.getRedRatings();
-      });
+      this.refreshRatings();
     } else {
       this.unsetBusiness();
     }
@@ -274,7 +285,7 @@ export default {
     this.collapsible = M.Collapsible.init(el, {});
 
     const ratingModal = document.getElementById('ratings-modal');
-    const ratingModalInstance = M.Modal.init(ratingModal, {});
+    this.ratingModalInstance = M.Modal.init(ratingModal, {});
   }
 }
 </script>

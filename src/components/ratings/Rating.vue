@@ -83,6 +83,7 @@
     <button-set
       backToUrl=""
       buttonSetType="form"
+      hideContinueButton="true"
       v-on:saveAndContinueClick="redirect = false"
       v-on:saveClick="redirect = true"
     ></button-set>
@@ -156,15 +157,14 @@ export default {
         if (this.isAdd) {
           this.addRating(rating)
           .then(() => {
-            // close modal...
+            this.ratingChanged();
             // toast...
           });
 
         } else if (this.isEdit) {
           this.editRating(rating)
           .then(() => {
-            console.log('Added Rating');
-            // close modal...
+            this.ratingChanged();
             // toast...
           });
         }
@@ -181,6 +181,11 @@ export default {
       return false;
     },
 
+    ratingChanged() {
+      this.$emit('ratingChanged');
+    },
+
+    // TODO: This needs to not be static
     getCategoryIdFromName(name) {
       switch (name) {
         case 'Red':
@@ -200,7 +205,7 @@ export default {
     }
 
     const users = this.getUsers([{ key: 'role', value: 'default' }]).then((users) => {
-      console.log(this.users);
+      // console.log(this.users);
     });
   }
 }

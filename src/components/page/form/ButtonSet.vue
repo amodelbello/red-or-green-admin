@@ -14,7 +14,7 @@
     Save
   </button>
 
-  <button class="
+  <button v-if="!hideContinueButton" class="
     btn 
     waves-effect 
     waves-light 
@@ -68,6 +68,7 @@ export default {
     'buttonSetType',
     'backToUrl',
     'createUrl',
+    'hideContinueButton',
   ],
   methods: {
     saveClick() {
