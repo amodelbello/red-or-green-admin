@@ -54,7 +54,22 @@
                 </tr>
               </table>
             </div>
+
           </div>
+
+          <div v-if="isEdit" class="row">
+            <!-- Modal Trigger -->
+            <div class="center-align">
+              <a id="ratings-modal-trigger" class="waves-effect waves-light btn modal-trigger" href="#ratings-modal">Add Rating</a>
+            </div>
+            <!-- Modal Structure -->
+            <div id="ratings-modal" class="modal">
+              <div class="modal-content">
+                <rating :businessId="business._id"></rating>
+              </div>
+            </div>
+          </div>
+
         </div>
       </li>
       <li :class="{ active: isAdd }">
@@ -106,6 +121,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import utility from '@/mixins/utility.js'
+import Rating from '@/components/ratings/Rating.vue'
 import MetaDates from '@/components/meta/Dates.vue'
 import ButtonSet from '@/components/page/form/ButtonSet.vue'
 import StateSelect from '@/components/page/form/StateSelect.vue'
@@ -113,6 +129,7 @@ import StateSelect from '@/components/page/form/StateSelect.vue'
 export default {
   name: 'Business',
   components: {
+    Rating,
     MetaDates,
     ButtonSet,
     StateSelect,
@@ -255,6 +272,9 @@ export default {
   mounted() {
     const el = document.getElementById('business-info');
     this.collapsible = M.Collapsible.init(el, {});
+
+    const ratingModal = document.getElementById('ratings-modal');
+    const ratingModalInstance = M.Modal.init(ratingModal, {});
   }
 }
 </script>
@@ -265,5 +285,8 @@ strong.chile-rating {
 }
 .collapsible {
   margin-bottom: 40px;
+}
+#ratings-modal-trigger {
+  margin-top: 0px;
 }
 </style>

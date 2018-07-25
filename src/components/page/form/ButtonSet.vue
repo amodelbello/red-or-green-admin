@@ -28,7 +28,7 @@
     Save & Continue
   </button>
 
-  <router-link :to="backToUrl">
+  <router-link v-if="backToUrl !== ''" :to="backToUrl">
   <a class="
     waves-effect 
     waves-light 
@@ -84,10 +84,10 @@ export default {
 a.save-button, 
 button.save-button {
   margin-left: 20px;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 a.create-button {
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 </style>
 

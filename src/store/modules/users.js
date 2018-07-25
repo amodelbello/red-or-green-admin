@@ -50,9 +50,16 @@ const mutations = {
 };
 
 const actions = {
-  getUsers: ({commit}) => {
+  getUsers: ({commit}, params) => {
+
+    let urlParams = '';
+    if (params && params.length > 0) {
+      params.forEach((param) => {
+        urlParams += `/${param.key}/${param.value}`;
+      });
+    }
     return axios.get(
-      process.env.VUE_APP_API_HOST + '/api/users', 
+      process.env.VUE_APP_API_HOST + '/api/users' + urlParams, 
       authMixin.getHttpAuthHeader()
     )
     .then((response) => {
