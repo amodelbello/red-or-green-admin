@@ -158,14 +158,14 @@ export default {
           this.addRating(rating)
           .then(() => {
             this.ratingChanged();
-            // toast...
+            utility.showToast('Rating added.');
           });
 
         } else if (this.isEdit) {
           this.editRating(rating)
           .then(() => {
             this.ratingChanged();
-            // toast...
+            utility.showToast('Rating saved.');
           });
         }
       }
