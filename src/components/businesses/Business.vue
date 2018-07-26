@@ -238,20 +238,40 @@ export default {
       return false;
     },
 
+    // TODO: This needs to not be static
+    getCategoryIdFromName(name) {
+      switch (name) {
+        case 'Red':
+          return '5b199079e968472545119302';
+        case 'Green':
+          return '5b19b39552e70a499c889122';
+        default:
+          return false;
+      }
+    },
+
     getGreenRatings() {
+      console.log(this.ratings);
       const greenRatings = this.ratings.filter((rating) => {
-        if (rating.category.name === 'Green Chile') {
+        if (
+          rating.category === this.getCategoryIdFromName('Green') ||
+          rating.category.name === 'Green Chile'
+        ){
           return true;
         }
         return false;
       });
       this.greenRatings = greenRatings;
+      console.log(this.greenRatings);
       return greenRatings;
     },
 
     getRedRatings() {
       const redRatings = this.ratings.filter((rating) => {
-        if (rating.category.name === 'Red Chile') {
+        if (
+          rating.category === this.getCategoryIdFromName('Red') ||
+          rating.category.name === 'Red Chile'
+        ){
           return true;
         }
         return false;
@@ -260,26 +280,29 @@ export default {
       return redRatings;
     },
 
-    refreshRatings() {
+    loadRatings() {
       this.getRatings(this.businessId).then(() => {
         this.getGreenRatings();
         this.getRedRatings();
       });
+    },
 
-      if (this.ratingModalInstance !== undefined) {
-        this.ratingModalInstance.close(); 
-      }
+    refreshRatings() {
+      this.getGreenRatings();
+      this.getRedRatings();
+      this.ratingModalInstance.close(); 
     }
   },
 
   created() {
     if (this.businessId !== undefined) {
       this.getBusiness(this.businessId);
-      this.refreshRatings();
+      this.loadRatings();
     } else {
-      this.unsetBusiness();
+      this.loadRatings();
     }
   },
+
   mounted() {
     const el = document.getElementById('business-info');
     this.collapsible = M.Collapsible.init(el, {});
