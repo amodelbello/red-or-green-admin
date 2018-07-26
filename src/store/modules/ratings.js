@@ -33,7 +33,7 @@ const mutations = {
       state.ratings.push(rating);
     }
 
-    state.rating = rating;
+    // state.rating = rating;
   },
 
   DELETE_RATING(state, rating) {

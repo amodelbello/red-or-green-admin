@@ -31,7 +31,7 @@
                 </tr>
                 <tr v-for="(rating, k) in redRatings" :key="k">
                   <td>{{ rating.updated | formatDate }}</td>
-                  <td>{{ rating.comments | truncateText}}</td>
+                  <td>{{ rating.user.username || '(pending user)' | truncateText }}</td>
                   <td class="red-text"><strong>{{ rating.rating }}</strong></td>
                 </tr>
                 <tr v-if="redRatings.length === 0">
@@ -46,7 +46,7 @@
                 </tr>
                 <tr v-for="(rating, k) in greenRatings" :key="k">
                   <td>{{ rating.updated | formatDate }}</td>
-                  <td>{{ rating.comments | truncateText }}</td>
+                  <td>{{ rating.user.username || '(pending user)' | truncateText }}</td>
                   <td class="green-text"><strong>{{ rating.rating }}</strong></td>
                 </tr>
                 <tr v-if="greenRatings.length === 0">
