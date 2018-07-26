@@ -101,8 +101,10 @@
       backToUrl=""
       buttonSetType="form"
       hideContinueButton="true"
+      :showDeleteButton="isEdit"
       v-on:saveAndContinueClick="redirect = false"
       v-on:saveClick="redirect = true"
+      v-on:deleteClick="doDelete = true"
     ></button-set>
   </form>
 </div>
@@ -130,6 +132,7 @@ export default {
     return {
       errors: [],
       redirect: true,
+      doDelete: false,
     }
   },
   computed: {
@@ -168,6 +171,7 @@ export default {
       'getRating',
       'addRating',
       'editRating',
+      'deleteRating',
       'unsetRating',
       'getUsers',
     ]),
@@ -186,11 +190,23 @@ export default {
           });
 
         } else if (this.isEdit) {
-          this.editRating(rating)
-          .then(() => {
-            this.ratingChanged();
-            utility.showToast('Rating saved.');
-          });
+
+          if (this.doDelete) {
+            this.doDelete = false;
+            this.deleteRating(rating._id)
+            .then(() => {
+              this.ratingChanged();
+              utility.showToast('Rating deleted.', 'red');
+            });
+
+
+          } else {
+            this.editRating(rating)
+            .then(() => {
+              this.ratingChanged();
+              utility.showToast('Rating saved.');
+            });
+          }
         }
       }
     },

@@ -25,7 +25,7 @@
     name="action"
     @click="saveAndContinueClick"
   >
-    Save & Continue
+    Save &amp; Continue
   </button>
 
   <router-link v-if="backToUrl !== ''" :to="backToUrl">
@@ -43,6 +43,23 @@
     <i class="material-icons teal-text left">arrow_back</i>
   </a>
   </router-link>
+
+  <button v-if="showDeleteButton" 
+    class="
+      btn 
+      waves-effect 
+      waves-light 
+      left
+      red
+      delete-button
+    " 
+    type="submit" 
+    name="action"
+    @click="deleteClick"
+  >
+    Delete
+  </button>
+
 </span>
 <span v-else-if="buttonSetType == 'create'">
   <router-link :to="createUrl">
@@ -69,6 +86,7 @@ export default {
     'backToUrl',
     'createUrl',
     'hideContinueButton',
+    'showDeleteButton'
   ],
   methods: {
     saveClick() {
@@ -76,6 +94,9 @@ export default {
     },
     saveAndContinueClick() {
       this.$emit('saveAndContinueClick');
+    },
+    deleteClick() {
+      this.$emit('deleteClick');
     },
   }
 }
@@ -85,10 +106,9 @@ export default {
 a.save-button, 
 button.save-button {
   margin-left: 20px;
-  /* margin-bottom: 40px; */
 }
-a.create-button {
-  /* margin-bottom: 40px; */
+button.delete-button {
+  margin-left: 40px;
 }
 </style>
 
