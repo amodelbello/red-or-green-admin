@@ -242,55 +242,44 @@ export default {
     getCategoryIdFromName(name) {
       switch (name) {
         case 'Red':
+        case 'Red Chile':
           return '5b199079e968472545119302';
         case 'Green':
+        case 'Green Chile':
           return '5b19b39552e70a499c889122';
         default:
           return false;
       }
     },
 
-    getGreenRatings() {
-      console.log(this.ratings);
-      const greenRatings = this.ratings.filter((rating) => {
+    getRatingsByCategory(categoryName, categoryRatingsPropertyName) {
+      const ratings = this.ratings.filter((rating) => {
         if (
-          rating.category === this.getCategoryIdFromName('Green') ||
-          rating.category.name === 'Green Chile'
+          rating.category === this.getCategoryIdFromName(categoryName) ||
+          rating.category.name === categoryName
         ){
           return true;
         }
         return false;
       });
-      this.greenRatings = greenRatings;
-      console.log(this.greenRatings);
-      return greenRatings;
-    },
-
-    getRedRatings() {
-      const redRatings = this.ratings.filter((rating) => {
-        if (
-          rating.category === this.getCategoryIdFromName('Red') ||
-          rating.category.name === 'Red Chile'
-        ){
-          return true;
-        }
-        return false;
-      });
-      this.redRatings = redRatings;
-      return redRatings;
+      this[categoryRatingsPropertyName] = ratings;
+      return ratings;
     },
 
     loadRatings() {
       this.getRatings(this.businessId).then(() => {
-        this.getGreenRatings();
-        this.getRedRatings();
+        this.loadRatingsByCategory();
       });
     },
 
     refreshRatings() {
-      this.getGreenRatings();
-      this.getRedRatings();
+      this.loadRatingsByCategory();
       this.ratingModalInstance.close(); 
+    },
+
+    loadRatingsByCategory() {
+      this.getRatingsByCategory('Red Chile', 'redRatings')
+      this.getRatingsByCategory('Green Chile', 'greenRatings')
     }
   },
 
