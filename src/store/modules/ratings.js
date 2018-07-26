@@ -32,8 +32,6 @@ const mutations = {
     if (state.ratings.length > 0) {
       state.ratings.push(rating);
     }
-
-    // state.rating = rating;
   },
 
   DELETE_RATING(state, rating) {
@@ -56,7 +54,11 @@ const actions = {
   },
 
   unsetRating: ({commit}) => {
-    commit('SET_RATING', {});
+    const emptyRating = {
+      user: {},
+      category: {},
+    }
+    commit('SET_RATING', emptyRating);
   },
 
   getRating: ({commit}, ratingId) => {
@@ -73,6 +75,15 @@ const actions = {
   },
 
   editRating: ({commit}, rating) => {
+
+    if (typeof rating.user === 'object') {
+      rating.user = rating.user._id;
+    }
+
+    if (typeof rating.category === 'object') {
+      rating.category = rating.category._id;
+    }
+
     return axios.put(
       process.env.VUE_APP_API_HOST + '/api/ratings/' + rating._id, 
       rating,
@@ -87,6 +98,15 @@ const actions = {
   },
 
   addRating: ({commit}, rating) => {
+
+    if (typeof rating.user === 'object') {
+      rating.user = rating.user._id;
+    }
+
+    if (typeof rating.category === 'object') {
+      rating.category = rating.category._id;
+    }
+
     return axios.post(
       process.env.VUE_APP_API_HOST + '/api/ratings', 
       rating,

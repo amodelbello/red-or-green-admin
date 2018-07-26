@@ -29,7 +29,7 @@
                 <tr>
                   <th colspan="3">Red</th>
                 </tr>
-                <tr v-for="(rating, k) in redRatings" :key="k">
+                <tr v-for="(rating, k) in redRatings" :key="k" @click="editRatingButtonClicked(rating)">
                   <td>{{ rating.updated | formatDate }}</td>
                   <td>{{ rating.user.username || '(pending user)' | truncateText }}</td>
                   <td class="red-text"><strong>{{ rating.rating }}</strong></td>
@@ -44,7 +44,7 @@
                 <tr>
                   <th colspan="3">Green</th>
                 </tr>
-                <tr v-for="(rating, k) in greenRatings" :key="k">
+                <tr v-for="(rating, k) in greenRatings" :key="k" @click="editRatingButtonClicked(rating)">
                   <td>{{ rating.updated | formatDate }}</td>
                   <td>{{ rating.user.username || '(pending user)' | truncateText }}</td>
                   <td class="green-text"><strong>{{ rating.rating }}</strong></td>
@@ -60,7 +60,12 @@
           <div v-if="isEdit" class="row">
             <!-- Modal Trigger -->
             <div class="center-align">
-              <a id="ratings-modal-trigger" class="waves-effect waves-light btn modal-trigger" href="#ratings-modal">Add Rating</a>
+              <a 
+                id="ratings-modal-trigger"
+                class="waves-effect waves-light btn modal-trigger"
+                href="#ratings-modal"
+                @click="addRatingButtonClicked()"
+              >Add Rating</a>
             </div>
             <!-- Modal Structure -->
             <div id="ratings-modal" class="modal">
@@ -191,10 +196,22 @@ export default {
       'editBusiness',
       'unsetBusiness',
       'getRatings',
+      'getRating',
+      'unsetRating',
     ]),
 
     getChileRating(category) {
       return utility.findAverageRatingByCategoryName(this.business, category);
+    },
+
+    addRatingButtonClicked() {
+      this.unsetRating();
+      this.ratingModalInstance.open(); 
+    },
+
+    editRatingButtonClicked(rating) {
+      this.getRating(rating._id);
+      this.ratingModalInstance.open(); 
     },
 
     formSubmit(business) {
@@ -297,5 +314,11 @@ strong.chile-rating {
 }
 #ratings-modal-trigger {
   margin-top: 0px;
+}
+#business-info table tr {
+  cursor: pointer;
+}
+#business-info table tr:hover {
+  background-color: #f9f9f9;
 }
 </style>

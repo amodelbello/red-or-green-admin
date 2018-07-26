@@ -55,14 +55,26 @@ export default {
   },
 
   // TODO: This needs to not be static
-  getCategoryIdFromName(name) {
-    name = name.toLowerCase();
-    switch (name) {
+  getCategoryIdFromName(categoryName) {
+
+    if (typeof categoryName === 'object') {
+      if (categoryName.name) {
+        categoryName = categoryName.name;
+      } else {
+        categoryName = categoryName._id;
+      }
+    }
+
+    categoryName = categoryName.toLowerCase();
+
+    switch (categoryName) {
       case 'red':
       case 'red chile':
+      case '5b199079e968472545119302':
         return '5b199079e968472545119302';
       case 'green':
       case 'green chile':
+      case '5b19b39552e70a499c889122':
         return '5b19b39552e70a499c889122';
       default:
         return false;

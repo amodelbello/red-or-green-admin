@@ -9,7 +9,12 @@
     </p>
     <div class="row">
       <div class="input-field col s6">
-        <select id="user-select" v-model="rating.user" class="browser-default form-input-margin">
+        <select
+          id="user-select" 
+          v-model="rating.user._id" 
+          class="browser-default form-input-margin"
+          :disabled="isEdit"
+        >
           <option value="" disabled>Select User</option>
           <option 
             v-for="(user, k) in users" 
@@ -20,10 +25,15 @@
         <label for="user-select" class="active">User</label>
       </div>
       <div class="input-field col s6">
-        <select id="chile-type" v-model="rating.category" class="browser-default form-input-margin">
+        <select
+          id="chile-type"
+          v-model="rating.category._id"
+          class="browser-default form-input-margin"
+          :disabled="isEdit"
+        >
           <option value="" disabled>Chile Type:</option>
-          <option value="Red">Red</option>
-          <option value="Green">Green</option>
+          <option :value="redCategoryId">Red</option>
+          <option :value="greenCategoryId">Green</option>
         </select>
         <label for="chile-type" class="active">Chile Type</label>
       </div>
@@ -69,8 +79,15 @@
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <textarea id="comments-textarea" class="materialize-textarea" v-model="rating.comments"></textarea>
-        <label for="comments-textarea">Comments</label>
+        <textarea 
+          id="comments-textarea" 
+          class="materialize-textarea" 
+          v-model="rating.comments"
+        ></textarea>
+        <label 
+          for="comments-textarea"
+          :class="{ active: rating.comments }"
+        >Comments</label>
       </div>
     </div>
 
@@ -104,7 +121,6 @@ export default {
     ButtonSet,
   },
   props: [
-    'ratingId',
     'businessId'
   ],
   mixins: {
@@ -122,12 +138,20 @@ export default {
       'users',
     ]),
 
+    redCategoryId() {
+      return utility.getCategoryIdFromName('red');
+    },
+
+    greenCategoryId() {
+      return utility.getCategoryIdFromName('green');
+    },
+
     isAdd() {
-      return (this.ratingId === undefined);
+      return (this.rating._id === undefined);
     },
 
     isEdit() {
-      return (this.ratingId !== undefined);
+      return (this.rating._id !== undefined);
     },
 
     pageHeaderContent() {
@@ -187,7 +211,7 @@ export default {
 
   },
   created() {
-    if (this.ratingId !== undefined) {
+    if (this.isEdit) {
       this.getRating(this.ratingId);
     } else {
       this.unsetRating();
