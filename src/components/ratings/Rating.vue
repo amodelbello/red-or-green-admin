@@ -151,7 +151,7 @@ export default {
     formSubmit(rating) {
       // from prop
       rating.business = this.businessId;
-      rating.category = this.getCategoryIdFromName(rating.category);
+      rating.category = utility.getCategoryIdFromName(rating.category);
 
       if (this.validateForm()) {
         if (this.isAdd) {
@@ -185,17 +185,6 @@ export default {
       this.$emit('ratingChanged');
     },
 
-    // TODO: This needs to not be static
-    getCategoryIdFromName(name) {
-      switch (name) {
-        case 'Red':
-          return '5b199079e968472545119302';
-        case 'Green':
-          return '5b19b39552e70a499c889122';
-        default:
-          return false;
-      }
-    }
   },
   created() {
     if (this.ratingId !== undefined) {

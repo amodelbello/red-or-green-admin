@@ -238,24 +238,10 @@ export default {
       return false;
     },
 
-    // TODO: This needs to not be static
-    getCategoryIdFromName(name) {
-      switch (name) {
-        case 'Red':
-        case 'Red Chile':
-          return '5b199079e968472545119302';
-        case 'Green':
-        case 'Green Chile':
-          return '5b19b39552e70a499c889122';
-        default:
-          return false;
-      }
-    },
-
     getRatingsByCategory(categoryName, categoryRatingsPropertyName) {
       const ratings = this.ratings.filter((rating) => {
         if (
-          rating.category === this.getCategoryIdFromName(categoryName) ||
+          rating.category === utility.getCategoryIdFromName(categoryName) ||
           rating.category.name === categoryName
         ){
           return true;

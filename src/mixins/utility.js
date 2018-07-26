@@ -53,4 +53,19 @@ export default {
       classes: classes,
     });
   },
+
+  // TODO: This needs to not be static
+  getCategoryIdFromName(name) {
+    name = name.toLowerCase();
+    switch (name) {
+      case 'red':
+      case 'red chile':
+        return '5b199079e968472545119302';
+      case 'green':
+      case 'green chile':
+        return '5b19b39552e70a499c889122';
+      default:
+        return false;
+    }
+  },
 }
