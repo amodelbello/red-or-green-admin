@@ -1,18 +1,3 @@
-<template>
-<span>
-  <select :id="idField" :value="value" @change="newStateSelected" class="browser-default">
-    <option value="" disabled>Select State</option>
-
-    <option 
-      v-for="(state, k) in states" 
-      :key="k" 
-      :value="state.abbreviation" 
-    >{{ state.name }}</option>
-
-  </select>
-</span>
-</template>
-
 <script>
 export default {
   props: [
@@ -100,6 +85,21 @@ export default {
   }, 
 }
 </script>
+
+<template>
+<span>
+  <select :id="idField" :value="value" @change="newStateSelected" class="browser-default">
+    <option value="" disabled>Select State</option>
+
+    <option 
+      v-for="(state, k) in states" 
+      :key="k" 
+      :value="state.abbreviation" 
+    >{{ state.name }}</option>
+
+  </select>
+</span>
+</template>
 
 <style>
 </style>

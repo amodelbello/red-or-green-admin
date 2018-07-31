@@ -1,13 +1,3 @@
-<template>
-<footer class="page-footer">
-  <div class="footer-copyright">
-    <div class="container">
-    &copy; {{ copyrightYear }} Red or Green
-    </div>
-  </div>
-</footer>
-</template>
-
 <script>
 export default {
   name: 'Footer',
@@ -21,6 +11,16 @@ export default {
   }
 }
 </script>
+
+<template>
+<footer class="page-footer">
+  <div class="footer-copyright">
+    <div class="container">
+    &copy; {{ copyrightYear }} Red or Green
+    </div>
+  </div>
+</footer>
+</template>
 
 <style>
 </style>

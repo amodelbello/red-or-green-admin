@@ -1,11 +1,3 @@
-<template>
-<div>
-  <img src="../../../src/assets/red_greenChile.png">
-  <h1>This is Register.</h1>  
-  <router-link :to="{name: 'Login'}" tag="a">Login</router-link>
-</div>
-</template>
-
 <script>
 export default {
   name: 'Register',
@@ -14,6 +6,14 @@ export default {
   }
 }
 </script>
+
+<template>
+<div>
+  <img src="../../../src/assets/red_greenChile.png">
+  <h1>This is Register.</h1>  
+  <router-link :to="{name: 'Login'}" tag="a">Login</router-link>
+</div>
+</template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

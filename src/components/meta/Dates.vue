@@ -1,12 +1,3 @@
-<template>
-  <dl v-if="show" class="left">
-    <dt>Created:</dt>
-    <dd>{{ created | formatDate }}</dd>
-    <dt>Last Modified:</dt>
-    <dd>{{ updated | formatDate }}</dd>
-  </dl>
-</template>
-
 <script>
 import utility from '@/mixins/utility.js'
 
@@ -28,6 +19,15 @@ export default {
   },
 }
 </script>
+
+<template>
+  <dl v-if="show" class="left">
+    <dt>Created:</dt>
+    <dd>{{ created | formatDate }}</dd>
+    <dt>Last Modified:</dt>
+    <dd>{{ updated | formatDate }}</dd>
+  </dl>
+</template>
 
 <style scoped>
 dt {

@@ -1,48 +1,3 @@
-<template>
-<span>
-  <a 
-    @click="editButtonClicked"
-    class="
-      btn-floating 
-      btn-small 
-      waves-effect 
-      waves-light 
-      left
-    "
-    >
-      <i class="material-icons">edit</i>
-  </a>
-
-  <a 
-    @click="deleteButtonClicked"
-    class="
-      btn-floating 
-      btn-small 
-      waves-effect 
-      waves-light 
-      right 
-      red 
-      modal-trigger
-    "
-    :href="modalIdWithHash"
-    >
-    <i class="material-icons">delete</i>
-  </a>
-
-  <!-- Delete Modal -->
-  <div :id="modalId" class="modal">
-    <div class="modal-content">
-      <h4 class="red-text">Are you sure?</h4>
-      <p>You are about to permanently delete "<em><strong>{{ item[nameFieldName] }}</strong></em>"</p>
-    </div>
-    <div class="modal-footer">
-      <a @click="deleteCancelled()" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
-      <a @click="deleteConfirmed()" class="modal-close waves-effect waves-white btn red white-text">Delete</a>
-    </div>
-  </div>
-</span>
-</template>
-
 <script>
 export default {
   name: 'GridButtonSet',
@@ -106,6 +61,51 @@ export default {
   }
 }
 </script>
+
+<template>
+<span>
+  <a 
+    @click="editButtonClicked"
+    class="
+      btn-floating 
+      btn-small 
+      waves-effect 
+      waves-light 
+      left
+    "
+    >
+      <i class="material-icons">edit</i>
+  </a>
+
+  <a 
+    @click="deleteButtonClicked"
+    class="
+      btn-floating 
+      btn-small 
+      waves-effect 
+      waves-light 
+      right 
+      red 
+      modal-trigger
+    "
+    :href="modalIdWithHash"
+    >
+    <i class="material-icons">delete</i>
+  </a>
+
+  <!-- Delete Modal -->
+  <div :id="modalId" class="modal">
+    <div class="modal-content">
+      <h4 class="red-text">Are you sure?</h4>
+      <p>You are about to permanently delete "<em><strong>{{ item[nameFieldName] }}</strong></em>"</p>
+    </div>
+    <div class="modal-footer">
+      <a @click="deleteCancelled()" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+      <a @click="deleteConfirmed()" class="modal-close waves-effect waves-white btn red white-text">Delete</a>
+    </div>
+  </div>
+</span>
+</template>
 
 <style scoped>
 </style>

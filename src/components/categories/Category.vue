@@ -1,42 +1,3 @@
-<template>
-<div class="row">
-  <h1>{{ pageHeaderContent }}</h1>
-  <form @submit.prevent="formSubmit(category)" class="col s12">
-    <p v-if="errors.length">
-      <strong>Please correct the following error(s):</strong>
-      <ul>
-        <li class="red-text" v-for="(error, k) in errors" :key="k">{{ error }}</li>
-      </ul>
-    </p>
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" id="category.name" v-model="category.name" class="validate">
-        <label for="category.name" :class="{ active: category.name }">Name</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <textarea v-model="category.description" id="category.description" class="materialize-textarea"></textarea>
-        <label for="category.description" :class="{ active: category.name }">Description</label>
-      </div>
-    </div>
-
-    <meta-dates 
-      :show="isEdit"
-      :created="category.created"
-      :updated="category.updated"
-    ></meta-dates>
-
-    <button-set
-      backToUrl="/categories"
-      buttonSetType="form"
-      v-on:saveAndContinueClick="redirect = false"
-      v-on:saveClick="redirect = true"
-    ></button-set>
-  </form>
-</div>
-</template>
-
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import utility from '@/mixins/utility.js'
@@ -140,6 +101,45 @@ export default {
   }
 }
 </script>
+
+<template>
+<div class="row">
+  <h1>{{ pageHeaderContent }}</h1>
+  <form @submit.prevent="formSubmit(category)" class="col s12">
+    <p v-if="errors.length">
+      <strong>Please correct the following error(s):</strong>
+      <ul>
+        <li class="red-text" v-for="(error, k) in errors" :key="k">{{ error }}</li>
+      </ul>
+    </p>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" id="category.name" v-model="category.name" class="validate">
+        <label for="category.name" :class="{ active: category.name }">Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea v-model="category.description" id="category.description" class="materialize-textarea"></textarea>
+        <label for="category.description" :class="{ active: category.name }">Description</label>
+      </div>
+    </div>
+
+    <meta-dates 
+      :show="isEdit"
+      :created="category.created"
+      :updated="category.updated"
+    ></meta-dates>
+
+    <button-set
+      backToUrl="/categories"
+      buttonSetType="form"
+      v-on:saveAndContinueClick="redirect = false"
+      v-on:saveClick="redirect = true"
+    ></button-set>
+  </form>
+</div>
+</template>
 
 <style scoped>
 </style>

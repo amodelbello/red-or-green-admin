@@ -1,47 +1,3 @@
-<template>
-<div class="row">
-  <h1>Businesses</h1>
-  <div v-if="loading" class="loading">
-    <loading></loading>
-  </div>
-  <div v-else>
-    <table>
-      <tr v-for="(business, k) in businesses" :key="k">
-
-        <td>{{ business.name }}</td>
-
-        <td>
-          <strong class="red-text">
-            {{ getChileRating(business, 'Red Chile') }}
-          </strong>
-        </td>
-
-        <td>
-          <strong class="green-text">
-            {{ getChileRating(business, 'Green Chile') }}
-          </strong>
-        </td>
-
-        <td class="button-set">
-          <grid-button-set
-            :item="business"
-            itemEditPath="/businesses"
-            v-on:deleteConfirmed="deleteClick(business._id)"
-          ></grid-button-set>
-        </td>
-
-      </tr>
-    </table>
-
-    <button-set
-      buttonSetType="create"
-      createUrl="/businesses/add"
-    ></button-set>
-  </div>
-
-</div>
-</template>
-
 <script>
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
@@ -97,6 +53,50 @@ export default {
   },
 }
 </script>
+
+<template>
+<div class="row">
+  <h1>Businesses</h1>
+  <div v-if="loading" class="loading">
+    <loading></loading>
+  </div>
+  <div v-else>
+    <table>
+      <tr v-for="(business, k) in businesses" :key="k">
+
+        <td>{{ business.name }}</td>
+
+        <td>
+          <strong class="red-text">
+            {{ getChileRating(business, 'Red Chile') }}
+          </strong>
+        </td>
+
+        <td>
+          <strong class="green-text">
+            {{ getChileRating(business, 'Green Chile') }}
+          </strong>
+        </td>
+
+        <td class="button-set">
+          <grid-button-set
+            :item="business"
+            itemEditPath="/businesses"
+            v-on:deleteConfirmed="deleteClick(business._id)"
+          ></grid-button-set>
+        </td>
+
+      </tr>
+    </table>
+
+    <button-set
+      buttonSetType="create"
+      createUrl="/businesses/add"
+    ></button-set>
+  </div>
+
+</div>
+</template>
 
 <style scoped>
 td.button-set {

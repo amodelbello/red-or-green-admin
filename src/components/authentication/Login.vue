@@ -1,3 +1,41 @@
+<script>
+import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+
+export default {
+  name: 'Login',
+  props: {
+  },
+  data() {
+    return {
+      email: '',
+      password: '',
+      error: false
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'authToken'
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'login'
+    ]),
+
+    submit() {
+      const loginPromise = this.login({
+        email: this.email,
+        password: this.password,
+      })
+      .catch(e => {
+        this.error = true;
+      });
+    }
+  },
+}
+</script>
+
 <template>
 <div id="login-page" class="row">
   <div class="row" v-if="error">
@@ -40,44 +78,6 @@
   </div>
 </div>
 </template>
-
-<script>
-import { mapGetters } from 'vuex';
-import { mapActions } from 'vuex';
-
-export default {
-  name: 'Login',
-  props: {
-  },
-  data() {
-    return {
-      email: '',
-      password: '',
-      error: false
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'authToken'
-    ]),
-  },
-  methods: {
-    ...mapActions([
-      'login'
-    ]),
-
-    submit() {
-      const loginPromise = this.login({
-        email: this.email,
-        password: this.password,
-      })
-      .catch(e => {
-        this.error = true;
-      });
-    }
-  },
-}
-</script>
 
 <style scoped>
 #login-page {

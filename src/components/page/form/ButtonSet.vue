@@ -1,3 +1,27 @@
+<script>
+export default {
+  name: 'ButtonSet',
+  props: [
+    'buttonSetType',
+    'backToUrl',
+    'createUrl',
+    'hideContinueButton',
+    'showDeleteButton'
+  ],
+  methods: {
+    saveClick() {
+      this.$emit('saveClick');
+    },
+    saveAndContinueClick() {
+      this.$emit('saveAndContinueClick');
+    },
+    deleteClick() {
+      this.$emit('deleteClick');
+    },
+  }
+}
+</script>
+
 <template>
 <span v-if="buttonSetType == 'form'">
   <button class="
@@ -78,30 +102,6 @@
 </span>
 </template>
 
-<script>
-export default {
-  name: 'ButtonSet',
-  props: [
-    'buttonSetType',
-    'backToUrl',
-    'createUrl',
-    'hideContinueButton',
-    'showDeleteButton'
-  ],
-  methods: {
-    saveClick() {
-      this.$emit('saveClick');
-    },
-    saveAndContinueClick() {
-      this.$emit('saveAndContinueClick');
-    },
-    deleteClick() {
-      this.$emit('deleteClick');
-    },
-  }
-}
-</script>
-
 <style scoped>
 a.save-button, 
 button.save-button {
@@ -111,4 +111,3 @@ button.delete-button {
   margin-left: 40px;
 }
 </style>
-

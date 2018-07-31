@@ -1,35 +1,3 @@
-<template>
-<div class="row">
-  <h1>Categories</h1>
-  <div v-if="loading" class="loading">
-    <loading></loading>
-  </div>
-  <div v-else>
-    <table>
-      <tr v-for="(category, k) in categories" :key="k">
-
-        <td>{{ category.name }}</td>
-
-        <td class="button-set">
-          <grid-button-set
-            :item="category"
-            itemEditPath="/categories"
-            v-on:deleteConfirmed="deleteClick(category._id)"
-          ></grid-button-set>
-        </td>
-
-      </tr>
-    </table>
-
-    <button-set
-      buttonSetType="create"
-      createUrl="/categories/add"
-    ></button-set>
-  </div>
-
-</div>
-</template>
-
 <script>
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
@@ -76,6 +44,38 @@ export default {
   },
 }
 </script>
+
+<template>
+<div class="row">
+  <h1>Categories</h1>
+  <div v-if="loading" class="loading">
+    <loading></loading>
+  </div>
+  <div v-else>
+    <table>
+      <tr v-for="(category, k) in categories" :key="k">
+
+        <td>{{ category.name }}</td>
+
+        <td class="button-set">
+          <grid-button-set
+            :item="category"
+            itemEditPath="/categories"
+            v-on:deleteConfirmed="deleteClick(category._id)"
+          ></grid-button-set>
+        </td>
+
+      </tr>
+    </table>
+
+    <button-set
+      buttonSetType="create"
+      createUrl="/categories/add"
+    ></button-set>
+  </div>
+
+</div>
+</template>
 
 <style scoped>
 td.button-set {

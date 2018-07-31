@@ -1,3 +1,9 @@
+<script>
+export default {
+  name: 'Loading',
+}
+</script>
+
 <template>
 <span>
   <h6>Loading...</h6>
@@ -6,12 +12,6 @@
   </div>
 </span>
 </template>
-
-<script>
-export default {
-  name: 'Loading',
-}
-</script>
 
 <style scoped>
 a#back-button {

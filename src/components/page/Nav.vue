@@ -1,50 +1,3 @@
-<template>
-<header>
-  <nav>
-    <div class="nav-wrapper">
-      <a href="/" class="brand-logo center">Red or Green Admin</a>
-      <a href="" data-target="nav-links" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
-      <ul 
-        v-if="isLoggedIn()" 
-        id="nav-mobile" 
-        class="right"
-      >
-        <li id="display-name">
-          <a class='dropdown-trigger' href='' data-target='dropdown1'>
-            Hello {{ displayName }}
-            <i class="material-icons right">arrow_drop_down</i>
-          </a>
-          <ul id='dropdown1' class='dropdown-content'>
-            <li><a @click="logoutClick">Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul v-else id="nav-mobile" class="right">
-        <li><a href="/">Login</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <ul 
-    v-if="isLoggedIn()" 
-    class="sidenav" 
-    id="nav-links"
-  >
-    <li><a href="/businesses">Businesses</a></li>
-    <li><a href="/categories">Categories</a></li>
-    <li v-if="userRole == 'super'"><a href="/users">Users</a></li>
-  </ul>
-  <ul 
-    v-else
-    class="sidenav" 
-    id="nav-links"
-  >
-    <li><a href="/">Login</a></li>
-    <li><a href="/register">Register</a></li>
-  </ul>
-</header>
-</template>
-
 <script>
 import authMixin from '@/mixins/authentication.js'
 import { mapGetters, mapActions } from 'vuex';
@@ -95,6 +48,53 @@ export default {
   }
 }
 </script>
+
+<template>
+<header>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo center">Red or Green Admin</a>
+      <a href="" data-target="nav-links" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+      <ul 
+        v-if="isLoggedIn()" 
+        id="nav-mobile" 
+        class="right"
+      >
+        <li id="display-name">
+          <a class='dropdown-trigger' href='' data-target='dropdown1'>
+            Hello {{ displayName }}
+            <i class="material-icons right">arrow_drop_down</i>
+          </a>
+          <ul id='dropdown1' class='dropdown-content'>
+            <li><a @click="logoutClick">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul v-else id="nav-mobile" class="right">
+        <li><a href="/">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <ul 
+    v-if="isLoggedIn()" 
+    class="sidenav" 
+    id="nav-links"
+  >
+    <li><a href="/businesses">Businesses</a></li>
+    <li><a href="/categories">Categories</a></li>
+    <li v-if="userRole == 'super'"><a href="/users">Users</a></li>
+  </ul>
+  <ul 
+    v-else
+    class="sidenav" 
+    id="nav-links"
+  >
+    <li><a href="/">Login</a></li>
+    <li><a href="/register">Register</a></li>
+  </ul>
+</header>
+</template>
 
 <style>
 nav {
