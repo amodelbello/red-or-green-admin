@@ -1,5 +1,5 @@
 import axios from 'axios';
-import authMixin from '@/mixins/authentication.js'
+import auth from '@/mixins/authentication.js'
 
 const state = {
   ratings: {},
@@ -64,7 +64,7 @@ const actions = {
   getRating: ({commit}, ratingId) => {
     return axios.get(
       process.env.VUE_APP_API_HOST + '/api/ratings/' + ratingId, 
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('SET_RATING', response.data.data);
@@ -87,7 +87,7 @@ const actions = {
     return axios.put(
       process.env.VUE_APP_API_HOST + '/api/ratings/' + rating._id, 
       rating,
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('EDIT_RATING', response.data.data);
@@ -110,7 +110,7 @@ const actions = {
     return axios.post(
       process.env.VUE_APP_API_HOST + '/api/ratings', 
       rating,
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('ADD_RATING', response.data.data);
@@ -123,7 +123,7 @@ const actions = {
   deleteRating: ({commit}, ratingId) => {
     return axios.delete(
       process.env.VUE_APP_API_HOST + '/api/ratings/' + ratingId, 
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('DELETE_RATING', response.data.data);

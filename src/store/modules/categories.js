@@ -1,5 +1,5 @@
 import axios from 'axios';
-import authMixin from '@/mixins/authentication.js'
+import auth from '@/mixins/authentication.js'
 
 const state = {
   categories: {},
@@ -48,7 +48,7 @@ const actions = {
   getCategories: ({commit}) => {
     return axios.get(
       process.env.VUE_APP_API_HOST + '/api/categories', 
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('SET_CATEGORIES', response.data.data);
@@ -65,7 +65,7 @@ const actions = {
   getCategory: ({commit}, categoryId) => {
     return axios.get(
       process.env.VUE_APP_API_HOST + '/api/categories/' + categoryId, 
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('SET_CATEGORY', response.data.data);
@@ -79,7 +79,7 @@ const actions = {
     return axios.put(
       process.env.VUE_APP_API_HOST + '/api/categories/' + category._id, 
       category,
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('EDIT_CATEGORY', response.data.data);
@@ -93,7 +93,7 @@ const actions = {
     return axios.post(
       process.env.VUE_APP_API_HOST + '/api/categories', 
       category,
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('ADD_CATEGORY', response.data.data);
@@ -106,7 +106,7 @@ const actions = {
   deleteCategory: ({commit}, categoryId) => {
     return axios.delete(
       process.env.VUE_APP_API_HOST + '/api/categories/' + categoryId, 
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('DELETE_CATEGORY', response.data.data);

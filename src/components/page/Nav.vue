@@ -1,5 +1,5 @@
 <script>
-import authMixin from '@/mixins/authentication.js'
+import auth from '@/mixins/authentication.js'
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -11,32 +11,22 @@ export default {
     ...mapGetters([
       'authToken'
     ]),
-
-    displayName() {
-      return authMixin.getDisplayName();
-    },
-
-    userRole() {
-      return authMixin.getUserRole();
-    }
   },
+
   methods: {
     ...mapActions([
       'logout'
     ]),
-
-    isLoggedIn() {
-      return authMixin.isLoggedIn();
-    },
 
     logoutClick() {
       this.logout();
       this.$router.push('/');
     }
   },
-  mixins: {
-    authMixin
-  },
+  mixins: [
+    auth,
+  ],
+
   mounted() {
     // Sidenav
     const sidenavElems = document.querySelectorAll('.sidenav');
@@ -62,7 +52,7 @@ export default {
       >
         <li id="display-name">
           <a class='dropdown-trigger' href='' data-target='dropdown1'>
-            Hello {{ displayName }}
+            Hello {{ getDisplayName() }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
           <ul id='dropdown1' class='dropdown-content'>
@@ -83,7 +73,7 @@ export default {
   >
     <li><a href="/businesses">Businesses</a></li>
     <li><a href="/categories">Categories</a></li>
-    <li v-if="userRole == 'super'"><a href="/users">Users</a></li>
+    <li v-if="getUserRole() == 'super'"><a href="/users">Users</a></li>
   </ul>
   <ul 
     v-else

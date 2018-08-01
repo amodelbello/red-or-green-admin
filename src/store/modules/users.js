@@ -1,5 +1,5 @@
 import axios from 'axios';
-import authMixin from '@/mixins/authentication.js'
+import auth from '@/mixins/authentication.js'
 
 const state = {
   users: {},
@@ -60,7 +60,7 @@ const actions = {
     }
     return axios.get(
       process.env.VUE_APP_API_HOST + '/api/users' + urlParams, 
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('SET_USERS', response.data.data);
@@ -77,7 +77,7 @@ const actions = {
   getUser: ({commit}, userId) => {
     return axios.get(
       process.env.VUE_APP_API_HOST + '/api/users/' + userId, 
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('SET_USER', response.data.data);
@@ -91,7 +91,7 @@ const actions = {
     return axios.put(
       process.env.VUE_APP_API_HOST + '/api/users/' + user._id, 
       user,
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('EDIT_USER', response.data.data);
@@ -105,7 +105,7 @@ const actions = {
     return axios.post(
       process.env.VUE_APP_API_HOST + '/api/users', 
       user,
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('ADD_USER', response.data.data);
@@ -118,7 +118,7 @@ const actions = {
   deleteUser: ({commit}, userId) => {
     return axios.delete(
       process.env.VUE_APP_API_HOST + '/api/users/' + userId, 
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('DELETE_USER', response.data.data);

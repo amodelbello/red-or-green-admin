@@ -15,48 +15,49 @@ const getTokenPayload = () => {
 };
 
 export default {
+  methods: {
+    isLoggedIn() {
+      const token = getAuthToken();
 
-  isLoggedIn() {
-    const token = getAuthToken();
-
-    if (token) {
-      const payload = getTokenPayload();
-      return payload.expiration > Date.now() / 1000;
-    } else {
-      return false;
-    }
-  },
-
-  getHttpAuthHeader() {
-    const config = {
-      headers: { 'Authorization': 'Bearer ' + getAuthToken() }
-    };
-
-    return config;
-  },
-
-  getUserRole() {
-    const payload = getTokenPayload();
-    if (payload !== null) {
-      const userRole = payload.role;
-      return userRole;
-    } else {
-      return null;
-    }
-  },
-
-  getDisplayName() {
-    const payload = getTokenPayload();
-    if (payload !== null) {
-      let displayName = 'User';
-      if (payload.firstName) {
-        displayName = payload.firstName;
-      } else if (payload.username) {
-        displayName = payload.username;
+      if (token) {
+        const payload = getTokenPayload();
+        return payload.expiration > Date.now() / 1000;
+      } else {
+        return false;
       }
-      return displayName;
-    } else {
-      return null;
-    }
-  },
+    },
+
+    getHttpAuthHeader() {
+      const config = {
+        headers: { 'Authorization': 'Bearer ' + getAuthToken() }
+      };
+
+      return config;
+    },
+
+    getUserRole() {
+      const payload = getTokenPayload();
+      if (payload !== null) {
+        const userRole = payload.role;
+        return userRole;
+      } else {
+        return null;
+      }
+    },
+
+    getDisplayName() {
+      const payload = getTokenPayload();
+      if (payload !== null) {
+        let displayName = 'User';
+        if (payload.firstName) {
+          displayName = payload.firstName;
+        } else if (payload.username) {
+          displayName = payload.username;
+        }
+        return displayName;
+      } else {
+        return null;
+      }
+    },
+  }
 }

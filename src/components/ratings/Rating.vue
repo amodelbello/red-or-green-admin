@@ -13,9 +13,9 @@ export default {
   props: [
     'businessId'
   ],
-  mixins: {
+  mixins: [
     utility,
-  },
+  ],
   data() {
     return {
       errors: [],
@@ -30,11 +30,11 @@ export default {
     ]),
 
     redCategoryId() {
-      return utility.getCategoryIdFromName('red');
+      return this.getCategoryIdFromName('red');
     },
 
     greenCategoryId() {
-      return utility.getCategoryIdFromName('green');
+      return this.getCategoryIdFromName('green');
     },
 
     isAdd() {
@@ -67,14 +67,14 @@ export default {
     formSubmit(rating) {
       // from prop
       rating.business = this.businessId;
-      rating.category = utility.getCategoryIdFromName(rating.category);
+      rating.category = this.getCategoryIdFromName(rating.category);
 
       if (this.validateForm()) {
         if (this.isAdd) {
           this.addRating(rating)
           .then(() => {
             this.ratingChanged();
-            utility.showToast('Rating added.');
+            this.showToast('Rating added.');
           });
 
         } else if (this.isEdit) {
@@ -84,7 +84,7 @@ export default {
             this.deleteRating(rating._id)
             .then(() => {
               this.ratingChanged();
-              utility.showToast('Rating deleted.', 'red');
+              this.showToast('Rating deleted.', 'red');
             });
 
 
@@ -92,7 +92,7 @@ export default {
             this.editRating(rating)
             .then(() => {
               this.ratingChanged();
-              utility.showToast('Rating saved.');
+              this.showToast('Rating saved.');
             });
           }
         }

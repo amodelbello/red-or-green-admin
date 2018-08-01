@@ -1,10 +1,10 @@
 import Users from '@/components/users/Users';
 import User from '@/components/users/User';
 
-import authMixin from '@/mixins/authentication.js'
+import auth from '@/mixins/authentication.js'
 
 const userIsSuper = (to, from, next) => {
-  const role = authMixin.getUserRole();
+  const role = auth.methods.getUserRole();
   if (role === 'super') {
     next();
   } else {

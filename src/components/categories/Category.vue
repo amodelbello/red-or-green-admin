@@ -13,9 +13,9 @@ export default {
   props: [
     'categoryId'
   ],
-  mixins: {
+  mixins: [
     utility,
-  },
+  ],
   data() {
     return {
       errors: [],
@@ -61,7 +61,7 @@ export default {
               this.$router.push('/categories');
             } else {
               this.$router.push('/categories/edit/' + this.category._id);
-              utility.showToast('Category created.');
+              this.showToast('Category created.');
             }
           });
 
@@ -71,7 +71,7 @@ export default {
             if (this.redirect) {
               this.$router.push('/categories');
             } else {
-              utility.showToast('Category saved.');
+              this.showToast('Category saved.');
             }
           });
         }

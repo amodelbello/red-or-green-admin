@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import authMixin from '@/mixins/authentication.js'
+import auth from '@/mixins/authentication.js'
 
 import authRoutes from './authentication';
 import businessRoutes from './businesses';
@@ -43,7 +43,7 @@ const isGuarded = (to) => {
 
 router.beforeEach((to, from, next) => {
 
-  const authorized = authMixin.isLoggedIn();
+  const authorized = auth.methods.isLoggedIn();
 
   if (isGuarded(to) && authorized) {
     next();

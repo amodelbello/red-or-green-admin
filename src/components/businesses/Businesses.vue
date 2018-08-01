@@ -15,9 +15,9 @@ export default {
     ButtonSet,
     GridButtonSet,
   },
-  mixins: {
+  mixins: [
     utility
-  },
+  ],
   data() {
     return {
       loading: true,
@@ -37,10 +37,6 @@ export default {
     deleteClick(businessId) {
       this.deleteBusiness(businessId)
     },
-
-    getChileRating(business, category) {
-      return utility.findAverageRatingByCategoryName(business, category);
-    }
 
   },
   watch: {
@@ -68,13 +64,13 @@ export default {
 
         <td>
           <strong class="red-text">
-            {{ getChileRating(business, 'Red Chile') }}
+            {{ findAverageRatingByCategoryName(business, 'Red Chile') }}
           </strong>
         </td>
 
         <td>
           <strong class="green-text">
-            {{ getChileRating(business, 'Green Chile') }}
+            {{ findAverageRatingByCategoryName(business, 'Green Chile') }}
           </strong>
         </td>
 

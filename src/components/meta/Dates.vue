@@ -9,12 +9,13 @@ export default {
     'updated',
   ],
 
-  mixins: {
+  mixins: [
     utility,
-  },
+  ],
+
   filters: {
     formatDate(date) {
-      return utility.formatDate(date);
+      return utility.methods.formatDate(date);
     },
   },
 }

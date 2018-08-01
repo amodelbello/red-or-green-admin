@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       modalInstance: null,
-      loading: true
+      loading: true,
     }
   },
   computed: {
@@ -40,12 +40,12 @@ export default {
       this.loading = false;
     }
   },
-    mixins: {
+  mixins: [
     utility,
-  },
+  ],
   filters: {
     formatDate(date) {
-      return utility.formatDate(date, 'M/DD/YYYY');
+      return utility.methods.formatDate(date, 'M/DD/YYYY');
     },
   },
   created() {

@@ -15,9 +15,9 @@ export default {
   props: [
     'userId'
   ],
-  mixins: {
+  mixins: [
     utility,
-  },
+  ],
   data() {
     return {
       errors: [],
@@ -78,7 +78,7 @@ export default {
               this.$router.push('/users');
             } else {
               this.$router.push('/users/edit/' + this.user._id);
-              utility.showToast('User created.');
+              this.showToast('User created.');
             }
           });
 
@@ -88,7 +88,7 @@ export default {
             if (this.redirect) {
               this.$router.push('/users');
             } else {
-              utility.showToast('User saved.');
+              this.showToast('User saved.');
             } 
           });
         }

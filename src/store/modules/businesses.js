@@ -1,5 +1,5 @@
 import axios from 'axios';
-import authMixin from '@/mixins/authentication.js'
+import auth from '@/mixins/authentication.js'
 
 const state = {
   businesses: {},
@@ -67,7 +67,7 @@ const actions = {
   getBusiness: ({commit}, businessId) => {
     return axios.get(
       process.env.VUE_APP_API_HOST + '/api/businesses/' + businessId, 
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('SET_BUSINESS', response.data.data);
@@ -81,7 +81,7 @@ const actions = {
     return axios.put(
       process.env.VUE_APP_API_HOST + '/api/businesses/' + business._id, 
       business,
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('EDIT_BUSINESS', response.data.data);
@@ -95,7 +95,7 @@ const actions = {
     return axios.post(
       process.env.VUE_APP_API_HOST + '/api/businesses', 
       business,
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('ADD_BUSINESS', response.data.data);
@@ -108,7 +108,7 @@ const actions = {
   deleteBusiness: ({commit}, businessId) => {
     return axios.delete(
       process.env.VUE_APP_API_HOST + '/api/businesses/' + businessId, 
-      authMixin.getHttpAuthHeader()
+      auth.methods.getHttpAuthHeader()
     )
     .then((response) => {
       commit('DELETE_BUSINESS', response.data.data);

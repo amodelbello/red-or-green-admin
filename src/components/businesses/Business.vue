@@ -26,15 +26,15 @@ export default {
       collapsible: null,
     }
   },
-  mixins: {
+  mixins: [
     utility,
-  },
+  ],
   filters: {
     formatDate(date) {
-      return utility.formatDate(date, 'M/DD/YYYY');
+      return utility.methods.formatDate(date, 'M/DD/YYYY');
     },
     truncateText(text) {
-      return utility.truncateText(text, 20, true)
+      return utility.methods.truncateText(text, 20, true)
     }
   },
   computed: {
@@ -73,7 +73,7 @@ export default {
     ]),
 
     getChileRating(category) {
-      return utility.findAverageRatingByCategoryName(this.business, category);
+      return this.findAverageRatingByCategoryName(this.business, category);
     },
 
     addRatingButtonClicked() {
@@ -95,7 +95,7 @@ export default {
               this.$router.push('/businesses');
             } else {
               this.$router.push('/businesses/edit/' + this.business._id);
-              utility.showToast('Business created.');
+              this.showToast('Business created.');
               this.collapsible.open(0);
             }
           });
@@ -106,7 +106,7 @@ export default {
             if (this.redirect) {
               this.$router.push('/businesses');
             } else {
-              utility.showToast('Business saved.');
+              this.showToast('Business saved.');
             } 
           });
         }
@@ -130,7 +130,7 @@ export default {
     getRatingsByCategory(categoryName, categoryRatingsPropertyName) {
       const ratings = this.ratings.filter((rating) => {
         if (
-          rating.category === utility.getCategoryIdFromName(categoryName) ||
+          rating.category === this.getCategoryIdFromName(categoryName) ||
           rating.category.name === categoryName
         ){
           return true;
