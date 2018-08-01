@@ -149,6 +149,7 @@ export default {
 
     refreshRatings() {
       this.loadRatingsByCategory();
+      this.getBusiness(this.businessId);
       this.ratingModalInstance.close(); 
     },
 
