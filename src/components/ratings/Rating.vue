@@ -1,67 +1,59 @@
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import utility from '@/mixins/utility.js'
-import MetaDates from '@/components/meta/Dates.vue'
-import ButtonSet from '@/components/page/form/ButtonSet.vue'
+import { mapGetters, mapActions } from "vuex";
+import utility from "@/mixins/utility.js";
+import MetaDates from "@/components/meta/Dates.vue";
+import ButtonSet from "@/components/page/form/ButtonSet.vue";
 
 export default {
-  name: 'Rating',
+  name: "Rating",
   components: {
     MetaDates,
-    ButtonSet,
+    ButtonSet
   },
-  props: [
-    'businessId'
-  ],
-  mixins: [
-    utility,
-  ],
+  props: ["businessId"],
+  mixins: [utility],
   data() {
     return {
       errors: [],
       redirect: true,
-      doDelete: false,
-    }
+      doDelete: false
+    };
   },
   computed: {
-    ...mapGetters([
-      'rating',
-      'users',
-    ]),
+    ...mapGetters(["rating", "users"]),
 
     redCategoryId() {
-      return this.getCategoryIdFromName('red');
+      return this.getCategoryIdFromName("red");
     },
 
     greenCategoryId() {
-      return this.getCategoryIdFromName('green');
+      return this.getCategoryIdFromName("green");
     },
 
     isAdd() {
-      return (this.rating._id === undefined);
+      return this.rating._id === undefined;
     },
 
     isEdit() {
-      return (this.rating._id !== undefined);
+      return this.rating._id !== undefined;
     },
 
     pageHeaderContent() {
       if (this.isAdd) {
-        return 'Add Rating';
+        return "Add Rating";
       } else {
-        return 'Edit Rating';
+        return "Edit Rating";
       }
-    },
-
+    }
   },
   methods: {
     ...mapActions([
-      'getRating',
-      'addRating',
-      'editRating',
-      'deleteRating',
-      'unsetRating',
-      'getUsers',
+      "getRating",
+      "addRating",
+      "editRating",
+      "deleteRating",
+      "unsetRating",
+      "getUsers"
     ]),
 
     formSubmit(rating) {
@@ -71,48 +63,37 @@ export default {
 
       if (this.validateForm()) {
         if (this.isAdd) {
-          this.addRating(rating)
-          .then(() => {
+          this.addRating(rating).then(() => {
             this.ratingChanged();
-            this.showToast('Rating added.');
+            this.showToast("Rating added.");
           });
-
         } else if (this.isEdit) {
-
           if (this.doDelete) {
             this.doDelete = false;
-            this.deleteRating(rating._id)
-            .then(() => {
+            this.deleteRating(rating._id).then(() => {
               this.ratingChanged();
-              this.showToast('Rating deleted.', 'red');
+              this.showToast("Rating deleted.", "red");
             });
-
-
           } else {
-            this.editRating(rating)
-            .then(() => {
+            this.editRating(rating).then(() => {
               this.ratingChanged();
-              this.showToast('Rating saved.');
+              this.showToast("Rating saved.");
             });
           }
         }
       }
     },
-    
+
     validateForm() {
       this.errors = [];
 
-      if (true) {
-        return true;
-      }
-
-      return false;
+      // TODO: Are we using this?
+      return true;
     },
 
     ratingChanged() {
-      this.$emit('ratingChanged');
-    },
-
+      this.$emit("ratingChanged");
+    }
   },
   created() {
     if (this.isEdit) {
@@ -121,123 +102,108 @@ export default {
       this.unsetRating();
     }
 
-    const users = this.getUsers([{ key: 'role', value: 'default' }]).then((users) => {
-      // console.log(this.users);
-    });
+    // const users = this.getUsers([{ key: 'role', value: 'default' }]).then((users) => {
+    // console.log(this.users);
+    // });
   }
-}
+};
 </script>
 
 <template>
-<div class="row">
-  <form @submit.prevent="formSubmit(rating)" class="col s12">
-    <p v-if="errors.length">
-      <strong>Please correct the following error(s):</strong>
-      <ul>
-        <li class="red-text" v-for="(error, k) in errors" :key="k">{{ error }}</li>
-      </ul>
-    </p>
-    <div class="row">
-      <div class="input-field col s6">
-        <select
-          id="user-select" 
-          v-model="rating.user._id" 
-          class="browser-default form-input-margin"
-          :disabled="isEdit"
-        >
-          <option value="" disabled>Select User</option>
-          <option 
-            v-for="(user, k) in users" 
-            :key="k" 
-            :value="user._id" 
-          >{{ user.username }}</option>
-        </select>
-        <label for="user-select" class="active">User</label>
+  <div class="row">
+    <form @submit.prevent="formSubmit(rating)" class="col s12">
+      <div v-if="errors.length">
+        <strong>Please correct the following error(s):</strong>
+        <ul>
+          <li class="red-text" v-for="(error, k) in errors" :key="k">{{ error }}</li>
+        </ul>
       </div>
-      <div class="input-field col s6">
-        <select
-          id="chile-type"
-          v-model="rating.category._id"
-          class="browser-default form-input-margin"
-          :disabled="isEdit"
-        >
-          <option value="" disabled>Chile Type:</option>
-          <option :value="redCategoryId">Red</option>
-          <option :value="greenCategoryId">Green</option>
-        </select>
-        <label for="chile-type" class="active">Chile Type</label>
+      <div class="row">
+        <div class="input-field col s6">
+          <select
+            id="user-select"
+            v-model="rating.user._id"
+            class="browser-default form-input-margin"
+            :disabled="isEdit"
+          >
+            <option value disabled>Select User</option>
+            <option v-for="(user, k) in users" :key="k" :value="user._id">{{ user.username }}</option>
+          </select>
+          <label for="user-select" class="active">User</label>
+        </div>
+        <div class="input-field col s6">
+          <select
+            id="chile-type"
+            v-model="rating.category._id"
+            class="browser-default form-input-margin"
+            :disabled="isEdit"
+          >
+            <option value disabled>Chile Type:</option>
+            <option :value="redCategoryId">Red</option>
+            <option :value="greenCategoryId">Green</option>
+          </select>
+          <label for="chile-type" class="active">Chile Type</label>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <table class="input-field">
-        <tr>
-          <th colspan="5">Rating:</th>
-        </tr>
-        <tr>
-          <td>
-            <label>
-              <input class="with-gap" v-model="rating.rating" type="radio" value="1" />
-              <span>1</span>
-            </label>
-          </td>
-          <td>
-            <label>
-              <input class="with-gap" v-model="rating.rating" type="radio" value="2" />
-              <span>2</span>
-            </label>
-          </td>
-          <td>
-            <label>
-              <input class="with-gap" v-model="rating.rating" type="radio" value="3" />
-              <span>3</span>
-            </label>
-          </td>
-          <td>
-            <label>
-              <input class="with-gap" v-model="rating.rating" type="radio" value="4" />
-              <span>4</span>
-            </label>
-          </td>
-          <td>
-            <label>
-              <input class="with-gap" v-model="rating.rating" type="radio" value="5" />
-              <span>5</span>
-            </label>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <textarea 
-          id="comments-textarea" 
-          class="materialize-textarea" 
-          v-model="rating.comments"
-        ></textarea>
-        <label 
-          for="comments-textarea"
-          :class="{ active: rating.comments }"
-        >Comments</label>
+      <div class="row">
+        <table class="input-field">
+          <tr>
+            <th colspan="5">Rating:</th>
+          </tr>
+          <tr>
+            <td>
+              <label>
+                <input class="with-gap" v-model="rating.rating" type="radio" value="1">
+                <span>1</span>
+              </label>
+            </td>
+            <td>
+              <label>
+                <input class="with-gap" v-model="rating.rating" type="radio" value="2">
+                <span>2</span>
+              </label>
+            </td>
+            <td>
+              <label>
+                <input class="with-gap" v-model="rating.rating" type="radio" value="3">
+                <span>3</span>
+              </label>
+            </td>
+            <td>
+              <label>
+                <input class="with-gap" v-model="rating.rating" type="radio" value="4">
+                <span>4</span>
+              </label>
+            </td>
+            <td>
+              <label>
+                <input class="with-gap" v-model="rating.rating" type="radio" value="5">
+                <span>5</span>
+              </label>
+            </td>
+          </tr>
+        </table>
       </div>
-    </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="comments-textarea" class="materialize-textarea" v-model="rating.comments"></textarea>
+          <label for="comments-textarea" :class="{ active: rating.comments }">Comments</label>
+        </div>
+      </div>
 
-    <meta-dates 
-      :show="isEdit"
-      :created="rating.created"
-      :updated="rating.updated"
-    ></meta-dates>
+      <meta-dates :show="isEdit" :created="rating.created" :updated="rating.updated"></meta-dates>
 
-    <button-set
-      backToUrl=""
-      buttonSetType="form"
-      hideContinueButton="true"
-      :showDeleteButton="isEdit"
-      v-on:saveAndContinueClick="redirect = false"
-      v-on:saveClick="redirect = true"
-      v-on:deleteClick="doDelete = true"
-    ></button-set>
-  </form>
-</div>
+      <button-set
+        backToUrl
+        buttonSetType="form"
+        hideContinueButton="true"
+        :showDeleteButton="isEdit"
+        v-on:saveAndContinueClick="redirect = false"
+        v-on:saveClick="redirect = true"
+        v-on:deleteClick="doDelete = true"
+      ></button-set>
+    </form>
+  </div>
 </template>
 
 <style scoped>

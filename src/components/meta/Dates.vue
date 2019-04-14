@@ -1,24 +1,16 @@
 <script>
-import utility from '@/mixins/utility.js'
+import utility from '@/mixins/utility.js';
 
 export default {
   name: 'MetaDates',
-  props: [
-    'show',
-    'created',
-    'updated',
-  ],
-
-  mixins: [
-    utility,
-  ],
-
   filters: {
     formatDate(date) {
       return utility.methods.formatDate(date);
     },
   },
-}
+  mixins: [utility],
+  props: ['show', 'created', 'updated'],
+};
 </script>
 
 <template>
